@@ -1,0 +1,27 @@
+.order-header-state {
+  .main-status-bar {
+    position: relative;
+    width: 275px;
+    height: 5px;
+    background-color: #749BC8;
+    margin-top: 8px;
+  }
+
+  .real-status-bar {
+    position: absolute;
+    background-color: #fff;
+    width: 42%;
+    height: 5px;
+    left: 0;
+    top: 0;
+  }
+
+  .state-value {
+    margin-top: 7px;
+    font-size: 15px;
+    span {
+      font-size: 12px;
+      margin-left: 7px;
+    }
+  }
+}

@@ -1,0 +1,83 @@
+<div class="inventory-types main-table" fxLayout="column">
+  <div class="inventory-types-header" fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="inventory-types-title">
+      Materials
+    </div>
+    <input class="inventory-types-filter" matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </div>
+  <mat-table #table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="materialCode">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Material Code</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row['materialCode'] }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row['description'] }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Type</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row['type'] }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="color">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Color</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row['color'] }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="gauge">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Gauge</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row['gauge'] }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="thicknessIn">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Thickness (IN)</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row['thicknessIn'] }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="widthIn">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Width (IN)</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row['widthIn'] }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="onHandFt">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>On Hand (Ft)</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row['onHandFt'] | number : '1.0-2' }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="demandFt">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Demand (Ft)</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row['demandFt'] | number : '1.0-2' }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="balanceFt">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Balance (Ft)</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row['balanceFt'] | number : '1.0-2' }}
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="visibleColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: visibleColumns;" (click)="gotoDetail(row)"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[10, 15, 20, 25]" showFirstLastButtons></mat-paginator>
+</div>

@@ -1,0 +1,167 @@
+<div class="machine-summary-content">
+  <div class="ms-column column-title">
+    <div class="machine-content">{{machine}}</div>
+  </div>
+
+  <div class="ms-column column-good-scrap" (click)="showPopover(data.totalGoodLn, 0)">
+    <div class="left-right-header">
+      <div class="main-content">
+        <p class="primary">{{data.totalGoodLn.primary |  unitsFormat :"ft":1:true}}<span>{{'ft' | userDisplayUnits}}</span></p>
+        <p class="secondary">{{data.totalGoodLn.secondary}} <span>pcs</span></p>
+      </div>
+      <div class="chart-content">
+        <app-summary-history [data]="data.totalGoodLn"></app-summary-history>
+      </div>
+    </div>
+    <div class="bullet-content">
+      <app-summary-state [data]='data.totalGoodLn.bullet' *ngIf="data.totalGoodLn.bullet"></app-summary-state>
+    </div>
+  </div>
+
+  <div class="ms-column column-good-scrap" (click)="showPopover(data.netScrap, 1)">
+    <div class="left-right-header">
+      <div class="main-content">
+        <p class="primary">{{data.netScrap.primary | summaryUnit}} <span>%</span></p>
+        <p class="secondary">{{data.netScrap.secondary |  unitsFormat :"ft":1:true}}<span>{{'ft' | userDisplayUnits}}</span></p>
+      </div>
+      <div class="chart-content">
+        <app-summary-history [data]="data.netScrap" [isReverse]="true"></app-summary-history>
+      </div>
+    </div>
+    <div class="bullet-content">
+      <app-summary-state [data]='data.netScrap.bullet' [isReverse]="true"></app-summary-state>
+    </div>
+  </div>
+
+  <div class="ms-column column-asy first-hide" (click)="showPopover(data.reclaimedScrap, 1)">
+    <div class="left-right-header">
+      <div class="main-content">
+          <p class="primary">{{data.reclaimedScrap.primary |  unitsFormat :"ft":1:true}}<span>{{'ft' | userDisplayUnits}}</span></p>
+          <p class="secondary">{{data.reclaimedScrap.secondary | summaryUnit}} <span>%</span></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="ms-column column-running" (click)="showPopover(data.runningThroughput, 0)">
+      <div class="top-bottom-header">
+        <div class="main-content">
+          {{data.runningThroughput.primary |  unitsFormat :"fpm":1:true}}<span>{{'fpm' | userDisplayUnits}}</span>
+        </div>
+        <div class="chart-content">
+          <app-summary-history [data]="data.runningThroughput"></app-summary-history>
+        </div>
+      </div>
+      <div class="bullet-content">
+        <app-summary-state [data]='data.runningThroughput.bullet'></app-summary-state>
+      </div>
+
+  </div>
+
+  <div class="ms-column column-oee-target" (click)="showPopover(data.oEE, 2)">
+    <div class="top-bottom-header">
+      <div class="main-content">
+        {{data.oEE.primary | summaryUnit}} <span>%</span>
+      </div>
+      <div class="chart-content">
+        <app-summary-history [data]="data.oEE"></app-summary-history>
+      </div>
+    </div>
+    <div class="bullet-content">
+      <app-summary-state [data]='data.oEE.bullet'></app-summary-state>
+    </div>
+  </div>
+
+  <div class="ms-column column-oee-target" (click)="showPopover(data.target, 2)">
+    <div class="top-bottom-header">
+      <div class="main-content">
+        {{data.target.primary | summaryUnit}} <span>%</span>
+      </div>
+      <div class="chart-content">
+        <app-summary-history [data]="data.target"></app-summary-history>
+      </div>
+    </div>
+    <div class="bullet-content">
+      <app-summary-state [data]='data.target.bullet'></app-summary-state>
+    </div>
+  </div>
+
+
+
+  <div class="ms-column column-asy first-hide" (click)="showPopover(data.availability, 2)">
+    <div class="top-bottom-header">
+      <div class="main-content">
+        {{data.availability.primary | summaryUnit}} <span>%</span>
+      </div>
+      <div class="chart-content">
+        <app-summary-history [data]="data.availability"></app-summary-history>
+      </div>
+    </div>
+    <div class="bullet-content">
+      <app-summary-state [data]='data.availability.bullet'></app-summary-state>
+    </div>
+  </div>
+
+  <div class="ms-column column-asy first-hide" (click)="showPopover(data.speed, 2)">
+    <div class="top-bottom-header">
+      <div class="main-content">
+        {{data.speed.primary | summaryUnit}} <span>%</span>
+      </div>
+      <div class="chart-content">
+        <app-summary-history [data]="data.speed"></app-summary-history>
+      </div>
+    </div>
+    <div class="bullet-content">
+      <app-summary-state [data]='data.speed.bullet'></app-summary-state>
+    </div>
+  </div>
+
+  <div class="ms-column column-asy first-hide" (click)="showPopover(data.yield, 2)">
+    <div class="top-bottom-header">
+      <div class="main-content">
+        {{data.yield.primary | summaryUnit}} <span>%</span>
+      </div>
+      <div class="chart-content">
+        <app-summary-history [data]="data.yield"></app-summary-history>
+      </div>
+    </div>
+    <div class="bullet-content">
+      <app-summary-state [data]='data.yield.bullet'></app-summary-state>
+    </div>
+  </div>
+
+  <div class="ms-column column-time-bar second-hide">
+    <div class="timebar-header">
+      <div class="timebar-header__item1">
+        <div class="timebar-header__title">RUNNING</div>
+        <div class="timebar-header__body">{{data.timeBar.running | timebarPercent}}<span>%</span></div>
+      </div>
+      <div class="timebar-header__item1">
+        <div class="timebar-header__title">CHANGEOVER</div>
+        <div class="timebar-header__body">{{data.timeBar.changeover | timebarPercent}}<span>%</span></div>
+      </div>
+      <div class="timebar-header__item1">
+        <div class="timebar-header__title">BREAKDOWN</div>
+        <div class="timebar-header__body">{{data.timeBar.breakdown | timebarPercent}}<span>%</span></div>
+      </div>
+      <div class="timebar-header__item2">
+        <div class="timebar-header__title">OTHER DOWNTIME</div>
+        <div class="timebar-header__body">{{data.timeBar.otherDowntime | timebarPercent}}<span>%</span></div>
+      </div>
+      <div class="timebar-header__item2">
+        <div class="timebar-header__title">EXEMPT</div>
+        <div class="timebar-header__body">{{data.timeBar.exempt | timebarPercent}}<span>%</span></div>
+      </div>
+      <div class="timebar-header__item2">
+        <div class="timebar-header__title">UNSCHEDULED</div>
+        <div class="timebar-header__body">{{data.timeBar.unscheduled | timebarPercent}}<span>%</span></div>
+      </div>
+    </div>
+
+    <div class="bullet-content">
+      <app-summary-timebar [data]='data.timeBar'></app-summary-timebar>
+    </div>
+
+  </div>
+
+
+</div>

@@ -1,0 +1,8 @@
+<div class="metric-configuration" fxLayout="column">
+  <div class="main-header" fxLayout="row" fxLayoutAlign="space-between center">
+    Metric Configuration
+  </div>
+  <div class="padding">
+    <app-config-table *ngFor="let machine of machines" [data]="machine"></app-config-table>
+  </div>
+</div>

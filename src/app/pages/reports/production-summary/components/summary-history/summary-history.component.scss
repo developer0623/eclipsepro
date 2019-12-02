@@ -1,0 +1,17 @@
+.summary-history-chart {
+  background: transparent;
+  width: 100%;
+  height: 100%;
+  path {
+    stroke: #4d4d4d;
+    stroke-width: 1;
+    fill: none;
+  }
+
+  .axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+  }
+}

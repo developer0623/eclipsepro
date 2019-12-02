@@ -1,0 +1,57 @@
+<div mat-dialog-title class="repeat-toolbar">Repeat Details</div>
+<div mat-dialog-content class="repeat-dialog-content" [ngClass]="{paddingBottom: downtimeData.occurs === 'Daily' || 'OneTime'}">
+  <div class="common-content">
+    <mat-form-field class="frequency-input">
+      <mat-label class="option-label">Frequency</mat-label>
+      <mat-select [(ngModel)]="downtimeData.occurs" placeholder="Select" aria-label="occurs">
+        <mat-option *ngFor="let item of repeatData" [value]="item.value">{{item.label}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="every-input" *ngIf="downtimeData.occurs !== 'OneTime'">
+      <mat-label class="option-label">Every</mat-label>
+      <mat-select [(ngModel)]="downtimeData.everyCount" aria-label="every count">
+        <mat-option *ngFor="let item of everyCount" [value]="item">{{item}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <span class="side-label" *ngIf="downtimeData.occurs === 'Daily'">Days</span>
+    <span class="side-label" *ngIf="downtimeData.occurs === 'Weekly'">Week(s)on</span>
+    <span class="side-label" *ngIf="downtimeData.occurs === 'Monthly'">Month(s)</span>
+  </div>
+  <div class="week-content" *ngIf="downtimeData.occurs === 'Weekly'">
+    <span *ngFor="let weekDay of weekData" class="week-day" [ngClass]="{isChecked: downtimeData.daysOfWeek.indexOf(weekDay.day) > -1}" (click)="onSelectedWeekDay(weekDay.day)">{{weekDay.id}}</span>
+  </div>
+  <div class="month-content" *ngIf="downtimeData.occurs === 'Monthly'">
+    <mat-radio-group [(ngModel)]="downtimeData.monthValue">
+        <mat-radio-button value="Each">Each</mat-radio-button>
+        <mat-radio-button value="OnThe">On the</mat-radio-button>
+    </mat-radio-group>
+    <div class="onTheDiv" *ngIf="downtimeData.monthValue === 'OnThe'">
+      <mat-form-field>
+        <mat-select [(ngModel)]="downtimeData.dayOfMonth" class="downtime-duration" aria-label="day of month">
+          <mat-option *ngFor="let item of dayOfMonth" [value]="item">{{item}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select [(ngModel)]="downtimeData.weekDayOfMonth" class="downtime-duration" aria-label="weekDay of month">
+          <mat-option *ngFor="let item of weekDayOfMonth" [value]="item">{{item}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div *ngIf="downtimeData.monthValue === 'Each'" class="calendar">
+      <table cellspacing="0" cellpadding="0" class="calendar-table">
+          <colgroup span="7"></colgroup>
+          <tbody>
+            <tr *ngFor="let days of dates">
+              <td *ngFor="let day of days">
+                  <span [ngClass]="{active: downtimeData.selectedDate.indexOf(day) > -1, today: todayDate === day}" (click)="onSelectedDay(day)">{{ day }}</span>
+              </td>
+            </tr>
+          </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions align="end">
+  <button class="cancel-btn" mat-button mat-dialog-close>Cancel</button>
+  <button class="save-btn" mat-button cdkFocusInitial (click)="saveRepeatDetails()">Save</button>
+</div>

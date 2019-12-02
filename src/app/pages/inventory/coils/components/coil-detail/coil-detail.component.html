@@ -1,0 +1,112 @@
+<div class="coil-detail">
+  <app-coil-detail-header *ngIf="coil"
+    [id]="coil.id" [material]="coil.materialCode"
+    [description]="coil.description" [balance]="coil.lengthRemainingFt">
+  </app-coil-detail-header>
+  <div class="coil-detail-content" *ngIf="coil" fxLayout="row" fxLayoutAlign="space-between">
+    <div fxLayout="column" fxLayoutAlign="space-around center">
+      <div class="content-item">
+        Status:<span class="content-value">{{coil.isStarted? 'Active' : 'Inactive'}}</span>
+      </div>
+      <div class="content-item">Completed:<span class="content-value">{{coil.isComplete || 'NA'}}</span></div>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="space-around center">
+      <div class="content-item">Vendor:<span class="content-value">{{coil.vendorName || 'NA'}}</span></div>
+      <div class="content-item">Heat:<span class="content-value">{{coil.heatNumber || 'NA'}}</span></div>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="space-around center">
+      <div class="content-item">Date In:<span class="content-value">{{coil.dateIn | date:'mediumDate'}}</span></div>
+      <div class="content-item">Date Out:<span class="content-value">{{coil.dateOut | date:'mediumDate'}}</span></div>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="space-around center">
+      <div class="content-item">Starting:<span class="content-value">{{coil.weightStartLbs | unitsFormat :'lbs':1}}</span></div>
+      <div class="content-item">Scrap:
+        <span class="content-value">
+          {{(coil.lengthExemptScrapFt + coil.lengthNonExemptScrapFt) | unitsFormat :'ft':1 || 'NA'}}
+        </span>
+      </div>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="space-around center">
+      <div class="content-item">Used:<span class="content-value">{{coil.lengthUsedFt | unitsFormat :'ft':1}}</span></div>
+      <div class="content-item">Adjustments:<span class="content-value">{{coil.lengthOtherAdjustmentsFt | unitsFormat :'ft':1}}</span></div>
+    </div>
+  </div>
+  <div class="coil-history-table">
+    <div class="table-title">Production Summary</div>
+    <mat-table #table [dataSource]="historiesSource">
+      <ng-container matColumnDef="productionDate">
+        <mat-header-cell *matHeaderCellDef>Production Date</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          {{ row['productionDate'] | date:'mediumDate' }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="goodPieceCount">
+        <mat-header-cell *matHeaderCellDef>Total Pieces</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          {{ row['goodPieceCount'] }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="goodFeet">
+        <mat-header-cell *matHeaderCellDef>Good</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          {{ row['goodFeet'] | unitsFormat:'ft':0 }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="scrapFeet">
+        <mat-header-cell *matHeaderCellDef>Scrap</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          {{ row['scrapFeet'] | unitsFormat:'ft':0 }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="scrapPct">
+        <mat-header-cell *matHeaderCellDef>Scrap Pct</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          {{ row['scrapPct'] | unitsFormat:'%':0}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="runMinutes">
+        <mat-header-cell *matHeaderCellDef>Running</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          {{ row['runMinutes'] | unitsFormat:'min':0}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="machineNumber">
+        <mat-header-cell *matHeaderCellDef >Machine</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          {{ row['machineNumber'] }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="orderCode">
+        <mat-header-cell *matHeaderCellDef >Order</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          {{ row['orderCode'] }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="toolingCode">
+        <mat-header-cell *matHeaderCellDef >Tooling</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          {{ row['toolingCode'] }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="customerName">
+        <mat-header-cell *matHeaderCellDef >Customer</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          {{ row['customerName'] }}
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="visibleHistoryColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: visibleHistoryColumns;"></mat-row>
+    </mat-table>
+  </div>
+
+</div>

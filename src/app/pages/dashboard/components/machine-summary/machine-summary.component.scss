@@ -1,0 +1,42 @@
+:host {
+  margin-top: 19px;
+}
+.machine-summary {
+  padding: 15px;
+  height: 156px;
+  &-title {
+    font-size: 16px;
+    color: #656565;
+    line-height: 19px;
+  }
+
+  &-value {
+    color: #47494D;
+    text-align: center;
+    .main-value {
+      font-size: 30px;
+      // line-height: 36px;
+      span {
+        font-size: 22px;
+      }
+
+    }
+    .sub-value {
+      font-size: 18px;
+      // line-height: 22px;
+      span {
+        font-size: 13px;
+      }
+    }
+  }
+
+  .machine-summary-content {
+    padding: 0 11px;
+  }
+
+  .range-value {
+    padding: 0 4px;
+    font-size: 11px;
+    color: #727272;
+  }
+}

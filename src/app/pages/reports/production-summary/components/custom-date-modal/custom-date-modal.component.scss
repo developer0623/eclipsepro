@@ -1,0 +1,24 @@
+.custom-date-dialog {
+  .mat-dialog-container {
+    padding: 0 0 24px 0 !important;
+  }
+
+  .btn-group-contanier {
+    padding: 20px;
+  }
+
+  .date-container {
+    width: 130px;
+    .mat-form-field-suffix {
+      top: 6px;
+    }
+  }
+
+  .duration-input {
+    width: 70px;
+  }
+
+  .duration-select {
+    width: 80px;
+  }
+}

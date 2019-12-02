@@ -1,0 +1,72 @@
+<div class="system-preferences" fxLayout="column">
+  <div class="main-header" fxLayout="row" fxLayoutAlign="space-between center">
+    System Preferences
+  </div>
+  <div class="padding">
+    <table class="preference-table data-table mat-elevation-z5">
+      <thead>
+        <tr>
+          <th class="first-col"><span>Setting</span></th>
+          <th><span>System</span></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span>Language</span>:</td>
+          <td>
+            <mat-menu #languageMenu="matMenu">
+              <button
+                mat-menu-item
+                *ngFor="let lang of languages"
+                (click)="changeLanguage(lang)"
+              >
+                {{lang.title}}
+              </button>
+            </mat-menu>
+            <button mat-button [matMenuTriggerFor]="languageMenu">
+              {{selectedLanguage.title}}
+              <mat-icon>arrow_drop_down</mat-icon>
+            </button>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><span>Units</span>:</td>
+          <td>
+            <mat-menu #unitMenu="matMenu">
+              <button
+                mat-menu-item
+                *ngFor="let unit of units"
+                (click)="changeUnit(unit)"
+              >
+                {{unit.key}}
+              </button>
+            </mat-menu>
+            <button mat-button [matMenuTriggerFor]="unitMenu">
+              {{selectedUnit.title}}
+              <mat-icon>arrow_drop_down</mat-icon>
+            </button>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Experimental Features</td>
+          <td><mat-checkbox class="experiment-check" [(ngModel)]="experimentalFeatures" aria-label="Experimental" (change)="setExperimentalFeatures()"></mat-checkbox></td>
+          <td>Get early access to features that are still under development. Experimental features might be removed without notice. Experimental features will be indicated by 🧪.</td>
+        </tr>
+        <!-- <tr feature-flag="quirks-mode">
+            <td>Controller Lockout 🧪</td>
+            <td>[check]</td>
+            <td>Show <md-icon md-font-icon="icon-lock-unlocked" class="icon s16"></md-icon>when the setup lockout key is not enabled. This requires XL version > 4.58.00.</md-icon></td>
+        </tr> -->
+        <tr *appFeatureFlag="'experimental'">
+          <td>Redirect to intranet url 🧪</td>
+          <td><mat-checkbox class="md-primary" [(ngModel)]="systemPreferences.redirectFromLocalhost" (change)="setRedirectFromLocalHost()"></mat-checkbox></td>
+          <td>When localhost is detected, automatically redirect the browser to <a>{{systemPreferences.intranetUrl}}</a>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

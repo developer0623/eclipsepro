@@ -1,0 +1,50 @@
+<div class="schedule-timeline padding" fxLayout="row">
+  <div id="graph-div" class="widget-group" flex="100">
+    <table class="signals overview-table">
+      <thead>
+        <tr>
+          <th class="row-name"></th>
+          <th>
+            <app-timeline-x-axis [height]="75" [width]="1920"
+              [displayXDomain]="focusExtent" [cursorTime]="cursor">
+            </app-timeline-x-axis>
+          </th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let item of machineArray">
+        <tr>
+          <td class="machine-label-td">
+            <div class="machineName">{{item.machine.description}}</div>
+            <app-snapshot-bar
+              fxLayout="row"
+              [isTimeline]="true"
+              [running]="item.statistics.runMinutes"
+              [exempt]="item.statistics.exemptMinutes"
+              [changeover]="item.statistics.changeoverMinutes"
+              [downtime]="item.statistics.nonExemptMinutes"
+              [breakdown]="item.statistics.breakdownMinutes"
+              [offline]="item.statistics.offlineMinutes">
+            </app-snapshot-bar>
+            <app-run-state
+              [state]="item.state.runState"
+              [lastRunStateChange]="item.state.lastRunStateChange"
+              [isOffline]="item.state.isOffline" [isSchedule]="true">
+            </app-run-state>
+          </td>
+          <td>
+            <app-timeline-block
+              [name]="item.machine.description"
+              [machineNumber]="item.machine.machineNumber"
+              [data]="item.schedule.scheduleBlocks"
+              [displayXDomain]="focusExtent"
+              [cursorTime]="cursor"
+              [height]="75" [width]="1920"
+              (domainChange)="onChangeDomain($event)"
+            >
+            </app-timeline-block>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

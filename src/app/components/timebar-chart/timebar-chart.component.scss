@@ -1,0 +1,43 @@
+.timebar-chart {
+  width: 100%;
+  height: 162px;
+  background-color: #0C325D;
+  padding-top: 70px;
+}
+
+.timebar-chart-content {
+  width: 100%;
+  height: 92px;
+}
+
+.x-axis {
+  font-size: 20px;
+  fill: #D8D8D8;
+}
+
+.brush {
+  .selection {
+    fill-opacity: 0;
+    stroke: #4E9AF3;
+    stroke-width: 2;
+  }
+}
+
+.brush-back {
+  fill: #EEEEEF;
+  height: 92px;
+}
+
+.x-axis-month {
+  text {
+    font-size: 10px;
+    fill: #D8D8D8;
+  }
+}
+
+.x-axis-year {
+  text {
+    font-size: 12px;
+    fill: #D8D8D8;
+  }
+}

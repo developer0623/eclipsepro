@@ -1,0 +1,25 @@
+<div class="detail-header" fxLayout="row" fxLayoutAlign="space-between">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <button type="button" mat-icon-button [routerLink]="['../']">
+      <mat-icon class="back-icon">arrow_back</mat-icon>
+    </button>
+    <div fxLayout="column">
+      <div class="machine-name">{{data.machine.name}}</div>
+      <div class="machine-sign">{{data.machine.description}}</div>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="end center">
+
+    <app-detail-header-state
+      [state]="data.state.runState"
+      [lastRunStateChange]="data.state.lastRunStateChange">
+    </app-detail-header-state>
+
+    <app-detail-header-next></app-detail-header-next>
+
+    <app-detail-header-time></app-detail-header-time>
+    
+    <mat-icon>settings</mat-icon>
+  </div>
+</div>

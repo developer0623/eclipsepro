@@ -1,0 +1,22 @@
+<div mat-dialog-title class="custom-dialog-toolbar" fxLayout="row" fxLayoutAlign="space-between center">
+  Add Location
+  <button mat-icon-button aria-label="Close Icon" (click)="onModalClose()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div mat-dialog-content>
+  <mat-form-field class="full-width">
+    <mat-label>Category</mat-label>
+    <mat-select [(ngModel)]="data.category">
+      <mat-option *ngFor="let item of categoryList" [value]="item.key">
+        {{item.displayName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <input matInput placeholder="Reason" [(ngModel)]="data.name">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions align="center">
+  <button mat-button [mat-dialog-close]="data.name" class="add-btn" cdkFocusInitial>ADD</button>
+</div>

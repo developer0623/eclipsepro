@@ -1,0 +1,165 @@
+<div class="material-detail">
+  <app-material-detail-header *ngIf="material"
+    [code]="material.id" [description]="material.description" [balance]="material.balanceFt">
+  </app-material-detail-header>
+  <div class="material-detail-content" *ngIf="material" fxLayout="row" fxLayoutAlign="space-between">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div class="content-item">Type:<span class="content-value">{{material.type}}</span></div>
+      <div class="content-item">Color:<span class="content-value">{{material.color}}</span></div>
+      <div class="content-item">Width:<span class="content-value">{{material.widthIn | unitsFormat :'in':2}}</span></div>
+      <div class="content-item">Gauge:<span class="content-value">{{material.gauge | unitsFormat :'ga':0}}</span></div>
+      <div class="content-item">Thickness:<span class="content-value">{{material.thicknessIn | unitsFormat :'in':2}}</span></div>
+      <div class="content-item">Lbs Per Feet:<span class="content-value">{{material.lbsPerFt | unitsFormat :'lbs':2}}</span></div>
+    </div>
+
+    <div fxLayout="column" fxLayoutAlign="space-around center">
+      <div class="content-item-1">On Hand:<span class="content-value">{{material.onHandFt | unitsFormat :'ft':1}}</span></div>
+      <div class="content-item-1">Demand:<span class="content-value">{{material.balanceFt | unitsFormat :'ft':1}}</span></div>
+    </div>
+  </div>
+  <mat-tab-group dynamicHeight class="material-detail-tab">
+    <mat-tab label="ACTIVE INVENTORY">
+      <mat-table #table [dataSource]="coilsSource">
+        <ng-container matColumnDef="coilId">
+          <mat-header-cell *matHeaderCellDef>Coil ID</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <div class="table-click-cell" (click)="gotoCoilDetail(row)">
+              {{ row['coilId'] }}
+            </div>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row['description'] }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="lengthRemainingFt">
+          <mat-header-cell *matHeaderCellDef>Remaining (Ft)</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row['lengthRemainingFt'] | number : '1.0-1' }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="lengthUsedFt">
+          <mat-header-cell *matHeaderCellDef>Used (Ft)</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row['lengthUsedFt'] | number : '1.0-1' }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="lengthNonExemptScrapFt">
+          <mat-header-cell *matHeaderCellDef>Scrap (Ft)</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row['lengthNonExemptScrapFt'] | number : '1.0-1' }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="dateIn">
+          <mat-header-cell *matHeaderCellDef>Age</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row['dateIn'] | amsTimeAgo }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="vendorName">
+          <mat-header-cell *matHeaderCellDef >Vendor</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row['vendorName'] }}
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="visibleCoilColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: visibleCoilColumns;"></mat-row>
+      </mat-table>
+    </mat-tab>
+    <mat-tab label="PRODUCTION SUMMARY">
+      <mat-table #table [dataSource]="historiesSource">
+        <ng-container matColumnDef="productionDate">
+          <mat-header-cell *matHeaderCellDef>Production Date</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row['productionDate'] | date:'mediumDate' }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="goodPieceCount">
+          <mat-header-cell *matHeaderCellDef>Total Pieces</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row['goodPieceCount'] }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="goodFeet">
+          <mat-header-cell *matHeaderCellDef>Good</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row['goodFeet'] | unitsFormat:'ft':0 }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="scrapFeet">
+          <mat-header-cell *matHeaderCellDef>Scrap</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row['scrapFeet'] | unitsFormat:'ft':0 }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="scrapPct">
+          <mat-header-cell *matHeaderCellDef>Scrap Pct</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row['scrapPct'] | unitsFormat:'%':0}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="runMinutes">
+          <mat-header-cell *matHeaderCellDef>Running</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row['runMinutes'] | unitsFormat:'min':0}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="machineNumber">
+          <mat-header-cell *matHeaderCellDef >Machine</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row['machineNumber'] }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="orderCode">
+          <mat-header-cell *matHeaderCellDef >Order</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row['orderCode'] }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="toolingCode">
+          <mat-header-cell *matHeaderCellDef >Tooling</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row['toolingCode'] }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="coilSerialNumber">
+          <mat-header-cell *matHeaderCellDef >Coild ID</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <div class="table-click-cell" (click)="gotoCoilDetail(row)">
+              {{ row['coilSerialNumber'] }}
+            </div>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="customerName">
+          <mat-header-cell *matHeaderCellDef >Customer</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row['customerName'] }}
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="visibleHistoryColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: visibleHistoryColumns;"></mat-row>
+      </mat-table>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+

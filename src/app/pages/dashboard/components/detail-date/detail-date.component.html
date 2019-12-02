@@ -1,0 +1,19 @@
+<mat-card class="detail-date" fxLayout="row" fxLayoutAlign="center center">
+  <div fxFlex="1"></div>
+  <div class="main-container" fxFlex="none"  fxLayout="row" fxLayoutAlign="center center">
+    <mat-icon class="change-icon left-icon" (click)="onAddDate(-1)">chevron_left</mat-icon>
+    <div class="date-year-week" fxLayout="column" fxLayoutAlign="center center">
+      <div class="date-week">{{week}}</div>
+      <div class="date-year">{{year}}</div>
+    </div>
+    <div class="date-month">{{date}}:</div>
+    <div class="date-order">Shift 1</div>
+    <mat-icon class="change-icon right-icon" (click)="onAddDate(1)">chevron_right</mat-icon>
+    <div class="date-picker-container">
+      <input matInput [matDatepicker]="picker" [formControl]="formDate" (dateChange)="onChangeDate()">
+      <mat-datepicker #picker></mat-datepicker>
+    </div>
+    <mat-icon class="date-icon" (click)="picker.open()">event</mat-icon>
+  </div>
+  <div fxFlex="1"></div>
+</mat-card>

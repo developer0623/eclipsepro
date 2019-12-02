@@ -1,0 +1,14 @@
+<div class="dashboard padding" fxLayout="row wrap">
+  <div *ngFor="let item of machineArray" [routerLink]="['../machines', item.machine.id]"
+    fxLayout="column" fxFlex="100" fxFlex.sm="50" fxFlex.md="33" fxFlex.lg="25" fxFlex.gt-lg="20"
+    class="machine-item"
+  >
+    <app-machine-dashboard-mini
+      [machine]="item.machine"
+      [machineState]="item.state"
+      [shiftStats]="item.statistics"
+      [metricDefinitions]="item.metricDefinitions">
+    </app-machine-dashboard-mini>
+  </div>
+
+</div>

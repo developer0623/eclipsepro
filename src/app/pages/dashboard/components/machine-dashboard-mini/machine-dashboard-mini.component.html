@@ -1,0 +1,31 @@
+<div class="ms-widget-front" fxLayout="column">
+  <div class="state-container" fxLayout="row" fxLayoutAlign="space-between center">
+      <div class="machine-title" matTooltip="{{machine.description}}">
+        {{machine.description}}
+      </div>
+      <app-run-state
+        [state]="machineState.runState"
+        [lastRunStateChange]="machineState.lastRunStateChange"
+        [isOffline]="machineState.isOffline">
+      </app-run-state>
+  </div>
+  <app-snapshot-bar
+    fxLayout="row"
+    [running]="shiftStats.runMinutes"
+    [exempt]="shiftStats.exemptMinutes" [changeover]="shiftStats.changeoverMinutes"
+    [downtime]="shiftStats.nonExemptMinutes" [breakdown]="shiftStats.breakdownMinutes"
+    [offline]="shiftStats.offlineMinutes">
+  </app-snapshot-bar>
+
+  <div class="pb-8" fxLayout="row wrap" fxLayoutAlign="start center">
+    <div *ngFor="let metric of metricDefinitions | showInMini: filterMetric" fxLayout="column" fxLayoutAlign="center center" fxFlex="33">
+      <span class="font-size-19 font-weight-500">
+        {{shiftStats[metric.primaryDataKey]|unitsFormat:metric.primaryUnits:3:true:true}}
+        <sup class="font-size-12">{{metric.primaryUnits | userDisplayUnits}}</sup>
+      </span>
+      <span class="metric-name">{{metric.metricName}}</span>
+      <!-- <span class="h4 secondary-text" translate="{{metricDefinitions[metric.metricName].metricName | camelCase}}">{{metricDefinitions[metric.metricName].metricName}}</span> -->
+    </div>
+  </div>
+</div>
+  

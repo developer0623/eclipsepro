@@ -1,0 +1,28 @@
+<mat-card class="machine-summary" fxLayout="column">
+  <div class="machine-summary-title">{{metric.metricName}}</div>
+  <div class="machine-summary-content" fxFlex fxLayout="row" fxLayoutAlign="space-between">
+    <div class="machine-summary-value" fxFlex fxLayout="column" fxLayoutAlign="center flex-start">
+      <div class="main-value">{{statistics[metric.primaryDataKey] | summaryUnit : metric.primaryUnits}}<span>{{metric.primaryUnits}}</span></div>
+      <div class="sub-value" *ngIf="metric.secondaryDataKey">
+        {{statistics[metric.secondaryDataKey] | summaryUnit : metric.secondaryUnits}}
+        <span>{{metric.secondaryUnits? metric.secondaryUnits: '%'}}</span>
+      </div>
+    </div>
+    <app-summary-history-chart
+      fxFlex="60"
+      [value]="statistics[metric.primaryDataKey]"
+      [metric]="metric"
+      [isReverse]="isReverse"
+      [histories]="histories">
+    </app-summary-history-chart>
+  </div>
+  <app-summary-statebar
+    [value]="statistics[metric.primaryDataKey]"
+    [metric]="metric"
+    [isReverse]="isReverse">
+  </app-summary-statebar>
+  <div class="range-value" fxLayout="row" fxLayoutAlign="space-between">
+    <span>{{metric.minValue}}</span>
+    <span>{{metric.maxValue}}</span>
+  </div>
+</mat-card>

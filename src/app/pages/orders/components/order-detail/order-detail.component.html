@@ -1,0 +1,143 @@
+<div class="content-wrapper" fxFlex fxLayout="column" *ngIf="order">
+  <app-order-detail-header
+    [orderCode]="order.orderCode"
+    [customerName]="order.customerName"
+    [status]="order.status"
+  ></app-order-detail-header>
+  <div class="order-detail-content" fxLayout="row" fxLayoutAlign="space-between">
+    <div class="materail-content">
+      <div class="content-item">
+        <div class="item-header">Material:</div>
+        <div class="item-value">{{order.materialCode}}</div>
+      </div>
+      <div class="content-item">
+        <div class="item-header">Tooling:</div>
+        <div class="item-value">{{order.toolingCode}}</div>
+      </div>
+    </div>
+    <div class="machine-content">
+      <div class="content-item">
+        <div class="item-header">Machine:</div>
+        <div class="item-value">M021-Top Cross</div>
+      </div>
+      <div class="content-item">
+        <div class="item-header">Sequence:</div>
+        <div class="item-value">{{order.sequence}}</div>
+      </div>
+    </div>
+
+    <div class="date-content">
+      <div class="content-item">
+        <div class="item-header">Required:</div>
+        <div class="item-value">{{order.requiredDate | date : 'MM/dd/yyy h:mm a'}}</div>
+      </div>
+      <div class="content-item">
+        <div class="item-header">Estimated:</div>
+        <div class="item-value">{{order.importDate | date : 'MM/dd/yyy h:mm a'}}</div>
+      </div>
+    </div>
+
+    <div class="value-content">
+      <div class="content-item">
+        <div class="item-header">Total:</div>
+        <div class="item-value">{{order.totalFt | number : '1.0-1'}} <span>FT</span></div>
+      </div>
+      <div class="content-item bg-black">
+        <div class="item-header">Remaning:</div>
+        <div class="item-value">{{order.remainingFt | number : '1.0-1'}} <span>FT</span></div>
+      </div>
+    </div>
+
+  </div>
+  <mat-tab-group mat-align-tabs="start" class="order-details-tab">
+    <mat-tab label="DETAILS">
+      <div class="details-tab-container">
+        <div class="details-first-row" fxLayout="row" fxLayoutAlign="space-between">
+          <div class="customer-address" fxLayout="row">
+            <div class="item-header">Customer:</div>
+            <div fxLayout="column">
+              <div class="item-value font-19">{{order.customerName}}</div>
+              <div class="item-value font-16">{{order.customerAddress1}}</div>
+              <div class="item-value font-16">{{order.customerCity}}</div>
+              <div class="item-value font-16">{{order.customerCountry}}, {{order.customerState}} {{order.customerZip}}</div>
+            </div>
+          </div>
+          <div class="details-date-container" fxLayout="column">
+            <div fxLayout="row" fxLayoutAlign="flex-start baseline">
+              <div class="item-header">Date Imported:</div>
+              <div class="item-value">{{order.importDate | date : 'MM/dd/yyy'}}</div>
+            </div>
+            <div class="second-row" fxLayout="row" fxLayoutAlign="flex-start baseline">
+              <div class="item-header">Required:</div>
+              <div class="item-value">{{order.requiredDate | date : 'MM/dd/yyy h:mm a'}}</div>
+            </div>
+          </div>
+        </div>
+    
+        <div class="details-second-row" fxLayout="row" fxLayoutAlign="space-between">
+          <div class="first-col" fxLayout="column">
+            <div fxLayout="row" fxLayoutAlign="flex-start baseline">
+              <div class="item-header">Truck #:</div>
+              <div class="item-value">{{order.truckNumber}}</div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="flex-start baseline">
+              <div class="item-header">Staging Bay:</div>
+              <div class="item-value">{{order.stagingBay}}</div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="flex-start baseline">
+              <div class="item-header">Loading Dock:</div>
+              <div class="item-value">{{order.loadingDock}}</div>
+            </div>
+          </div>
+  
+          <div class="second-col" fxLayout="column">
+            <div fxLayout="row" fxLayoutAlign="flex-start baseline">
+              <div class="item-header">Part #:</div>
+              <div class="item-value">######-###</div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="flex-start baseline">
+              <div class="item-header">MC:</div>
+              <div class="item-value">######-###</div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="flex-start baseline">
+              <div class="item-header">Weight:</div>
+              <div class="item-value">######-###</div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="flex-start baseline">
+              <div class="item-header">Pack Qty:</div>
+              <div class="item-value">######-###</div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="flex-start baseline">
+              <div class="item-header">Special:</div>
+              <div class="item-value">######-###</div>
+            </div>
+          </div>
+  
+          <div class="bundle-container" fxLayout="column">
+            <div class="bundle-maximums">BUNDLE MAXIMUMS:</div>
+            <div class="bundle-content" fxLayout="column">
+              <div fxLayout="row" fxLayoutAlign="flex-start baseline">
+                <div class="item-header">Weight:</div>
+                <div class="item-value">## <span>lbs</span></div>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="flex-start baseline">
+                <div class="item-header">Piece Count:</div>
+                <div class="item-value">##</div>
+              </div>
+              <div class="min-max-row" fxLayout="row" fxLayoutAlign="flex-start flex-end">
+                <div class="item-header">Min/Max<br/>Length Difference:</div>
+                <div class="item-value">## <span>%</span></div>
+              </div>
+  
+            </div>
+            
+          </div>
+        </div>
+
+      </div>
+      
+    </mat-tab>
+    <mat-tab label="ITEMS">Content 2</mat-tab>
+    <mat-tab label="PRODUCTION SUMMARY">Content 3</mat-tab>
+  </mat-tab-group>
+</div>

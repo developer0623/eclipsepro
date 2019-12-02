@@ -1,0 +1,12 @@
+<mat-card class="app-pareto" fxLayout="column">
+  <div class="pareto-title">{{title}}</div>
+  <div class="pareto-row" *ngFor="let item of vm" fxLayout="row" fxLayoutAlign="space-between">
+    <div class="pareto-body" fxFlex>
+      <div class="pareto-rect" [ngStyle]="getWidth(item.barPercent)"></div>
+      <div class="pareto-name">{{item.name.toLowerCase()}}</div>
+    </div>
+    <div class="pareto-value" fxFlex = "20">
+      {{item.value | summaryUnit : this.units}} <span>{{this.units.toLowerCase()}}</span>
+    </div>
+  </div>
+</mat-card>

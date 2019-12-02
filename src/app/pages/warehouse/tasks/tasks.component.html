@@ -1,0 +1,55 @@
+<div class="warehouse-tasks" fxLayout="column">
+  <div class="main-header" fxLayout="row" fxLayoutAlign="space-between center">
+    WAREHOUSE: TASKS
+  </div>
+  <div class="padding task-content">
+    <div class="task-list current-task-list">
+      <div fxLayout="row" class="task-list-header" fxLayoutAlign="center start">
+        CURRENT LIST
+      </div>
+      <div fxLayout="column">
+        <app-task-item *ngFor="let task of (tasks$ | async).readyTasks;" [task]="task" [state]='0'></app-task-item>
+        <mat-card *ngIf="(tasks$ | async).readyTasksRemaining" class="not-showed-title">
+          {{(tasks$ | async).readyTasksRemaining}} tasks not shown
+        </mat-card>
+      </div>
+    </div>
+
+    <div  class="task-list active-task-list">
+      <div fxLayout="row" class="task-list-header" fxLayoutAlign="center start">
+        ACTIVE
+      </div>
+      <div fxLayout="column">
+        <app-task-item *ngFor="let task of (tasks$ | async).activeTasks;" [task]="task" [state]='1'></app-task-item>
+        <mat-card *ngIf="(tasks$ | async).activeTasksRemaining" class="not-showed-title">
+          {{(tasks$ | async).activeUnshownCount}} tasks not shown
+        </mat-card>
+      </div>
+    </div>
+
+    <div class="task-list completed-task-list">
+      <div fxLayout="row" class="task-list-header" fxLayoutAlign="center start">
+        COMPLETED
+      </div>
+      <div class="task-complete-calendar">
+        <div class="showed-calendar">
+          <mat-icon class="chevron" (click)="onChangeDate(-1)">chevron_left</mat-icon>
+          <p>{{comFilterDate | date : "MMM dd"}}<span>{{comFilterDate | date : "yyyy"}}</span></p>
+          <mat-icon class="chevron" (click)="onChangeDate(1)">chevron_right</mat-icon>
+        </div>
+        <mat-form-field class="real-calendar">
+          <input matInput [(ngModel)]="comFilterDate" [matDatepicker]="filterDate" placeholder="" disabled>
+          <mat-datepicker-toggle matSuffix [for]="filterDate"></mat-datepicker-toggle>
+          <mat-datepicker #filterDate disabled="false"></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" style="margin-top: 13px;">
+        <app-task-item *ngFor="let task of (tasks$ | async).completedTasks;" [task]="task" [state]='2'></app-task-item>
+        <mat-card *ngIf="(tasks$ | async).completedTasksRemaining" class="not-showed-title">
+          {{(tasks$ | async).completedTasksRemaining}} tasks not shown
+        </mat-card>
+      </div>
+    </div>
+
+  </div>
+</div>

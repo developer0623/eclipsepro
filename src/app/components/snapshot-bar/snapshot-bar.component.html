@@ -1,0 +1,38 @@
+ <div class="snapshot-bar" [ngClass]="{'--timeline': isTimeline}">
+  <div class="running" *ngIf="running"
+    [ngClass]="{'ph-8': compareMedia('gt-sm')}"[ngStyle]="getStyle(running)"
+    matTooltip="Running: {{running | number:'1.0-1'}} min | {{running*100/total() | number:'1.0-1'}}%"
+    matTooltipClass="snapshot-bar-tooltip"
+  >
+  </div>
+  <div class="exempt" *ngIf="exempt"
+    [ngClass]="{'ph-8': compareMedia('gt-sm')}" [ngStyle]="getStyle(exempt)"
+    matTooltip="Unscheduled: {{exempt| number:'1.0-1'}} min | {{exempt*100/total() | number:'1.0-1'}}%"
+    matTooltipClass="snapshot-bar-tooltip"
+  >
+  </div>
+  <div class="changeover" *ngIf="changeover"
+    [ngClass]="{'ph-8': compareMedia('gt-sm')}" [ngStyle]="getStyle(changeover)"
+    matTooltip="Changeover: {{changeover| number:'1.0-1'}} in. | {{changeover*100/total() | number:'1.0-1'}}%"
+    matTooltipClass="snapshot-bar-tooltip"
+  >
+  </div>
+  <div class="downtime" *ngIf="downtime"
+    [ngClass]="{'ph-8': compareMedia('gt-sm')}" [ngStyle]="getStyle(downtime)"
+    matTooltip="Downtime: {{downtime| number:'1.0-1'}} min | {{downtime*100/total() | number:'1.0-1'}}%"
+    matTooltipClass="snapshot-bar-tooltip"
+  >
+  </div>
+  <div class="breakdown" *ngIf="breakdown"
+    [ngClass]="{'ph-8': compareMedia('gt-sm')}" [ngStyle]="getStyle(breakdown)"
+    matTooltip="Breakdown: {{breakdown| number:'1.0-1'}} min | {{breakdown*100/total() | number:'1.0-1'}}%"
+    matTooltipClass="snapshot-bar-tooltip"
+  >
+  </div>
+  <div class="offline" *ngIf="offline"
+    [ngClass]="{'ph-8': compareMedia('gt-sm')}" [ngStyle]="getStyle(offline)"
+    matTooltip="Offline: {{offline| number:'1.0-1'}} min | {{offline*100/total() | number:'1.0-1'}}%"
+    matTooltipClass="snapshot-bar-tooltip"
+  >
+  </div>
+</div>

@@ -1,0 +1,109 @@
+<div class="bundle-item" *ngIf="!isdetail">
+  <div class="bundle-item__value">
+    <div class="real-value">{{item.weightLbs}}<span>lbs</span></div>
+    <div class="remain-value1 --weight" *ngIf="item.weightLbs > item.maxWeightLbs">
+      <img src="assets/icons/png-icon/alert.png" class="remain-icon" />
+      <div class="remain-flex"></div>
+      <i class="icon-plus remain-plus"></i>
+      <div class="remain-number">{{item.weightLbs - item.maxWeightLbs}}<span>lbs</span></div>
+      
+    </div>
+    <div class="remain-value2" *ngIf="item.maxWeightLbs >= item.weightLbs">
+      <div class="remain-number">{{item.maxWeightLbs - item.weightLbs}}<span>lbs</span></div>
+    </div>
+
+  </div>
+  <div class="bundle-item__weightbar" [ngClass]="{'max-exceed': item.weightLbs > item.maxWeightLbs}">
+    <div class="real-bar" [ngStyle]="getWidth(0)"></div>
+    <i class="icon-plus exceed-icon"></i>
+  </div>
+  <div class="bundle-item__piecebar" [ngClass]="{'max-exceed': item.pieces > item.maxPieces}">
+    <div class="real-bar" [ngStyle]="getWidth(1)"></div>
+    <i  class="icon-plus exceed-icon"></i>
+  </div>
+
+  <div class="bundle-item__value">
+    <div class="real-value">{{item.pieces}}<span>pcs</span></div>
+    <div class="remain-value1 --piece" *ngIf="item.pieces > item.maxPieces">
+      <img src="assets/icons/png-icon/alert.png" class="remain-icon" />
+      <div class="remain-flex"></div>
+      <i class="icon-plus remain-plus"></i>
+      <div class="remain-number">{{item.pieces - item.maxPieces}}<span>pcs</span></div>
+      
+    </div>
+    <div class="remain-value2" *ngIf="item.maxPieces >= item.pieces">
+      <div class="remain-number">{{item.maxPieces - item.pieces}}<span>pcs</span></div>
+    </div>
+
+  </div>
+  <div class="bundle-item__length">
+    <div class="bundle-max" [ngStyle]="getWidth(2)"></div>
+    <div class="bundle-min" [ngStyle]="getWidth(3)"></div>
+  </div>
+  <img src="assets/icons/png-icon/location.png" class="bundle-location" *ngIf="item.bundleMaxLengthIn > item.orderMaxLengthIn/2"/> 
+  
+</div>
+
+<div class="bundle-item-inline" *ngIf="isdetail">
+  <div class="bundle-item-inline__left">
+    <div class="bundle-item-inline__content">
+      <div class="bundle-item-inline__checked">
+        <mat-checkbox aria-label="Select Tool" [(ngModel)]="item.checked" (change)="onChange()">
+        </mat-checkbox>
+
+      </div>
+      <div class="bundle-item-inline__weight">
+        <div class="bundle-item-inline__value">
+          <div class="real-value">{{item.weightLbs}}<span>lbs</span></div>
+          <div class="remain-value1 --weight" *ngIf="item.weightLbs > item.maxWeightLbs">
+            <img src="assets/icons/png-icon/alert.png" class="remain-icon" />
+            <div class="remain-flex"></div>
+            <i class="icon-plus remain-plus"></i>
+            <div class="remain-number">{{item.weightLbs - item.maxWeightLbs}}<span>lbs</span></div>
+            
+          </div>
+          <div class="remain-value2" *ngIf="item.maxWeightLbs >= item.weightLbs">
+            <div class="remain-number">{{item.maxWeightLbs - item.weightLbs}}<span>lbs</span></div>
+          </div>
+      
+        </div>
+        <div class="bundle-item-inline__weightbar" [ngClass]="{'max-exceed': item.weightLbs > item.maxWeightLbs}">
+          <div class="real-bar" [ngStyle]="getWidth(0)"></div>
+          <i class="icon-plus exceed-icon"></i>
+        </div>
+
+      </div>
+      <div class="bundle-item-inline__piece">
+        <div class="bundle-item-inline__value">
+          <div class="real-value">{{item.pieces}}<span>pcs</span></div>
+          <div class="remain-value1 --piece" *ngIf="item.pieces > item.maxPieces">
+            <img src="assets/icons/png-icon/alert.png" class="remain-icon" />
+            <div class="remain-flex"></div>
+            <i class="icon-plus remain-plus"></i>
+            <div class="remain-number">{{item.pieces - item.maxPieces}}<span>pcs</span></div>
+            
+          </div>
+          <div class="remain-value2" *ngIf="item.maxPieces >= item.pieces">
+            <div class="remain-number">{{item.maxPieces - item.pieces}}<span>pcs</span></div>
+          </div>
+      
+        </div>
+
+        <div class="bundle-item__piecebar" [ngClass]="{'max-exceed': item.pieces > item.maxPieces}">
+          <div class="real-bar" [ngStyle]="getWidth(1)"></div>
+          <i class="icon-plus exceed-icon"></i>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="bundle-item-inline__length">
+      <div class="bundle-max" [ngStyle]="getWidth(2)"></div>
+      <div class="bundle-min" [ngStyle]="getWidth(3)"></div>
+    </div>
+      <img src="assets/icons/png-icon/location.png" class="bundle-location" *ngIf="item.bundleMaxLengthIn > item.orderMaxLengthIn/2"/>
+  </div>
+
+  <div class="bundle-item-inline__right"></div>  
+    
+</div>

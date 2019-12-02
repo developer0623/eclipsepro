@@ -1,0 +1,47 @@
+<div class="content-wrapper" fxFlex fxLayout="column" *ngIf="singleData">
+  <app-detail-header fxFlex="none" [data]="singleData"></app-detail-header>
+  <app-detail-date fxFlex="none"></app-detail-date>
+  <div class="summary-list" fxLayout="row wrap" fxLayoutAlign="space-between">
+    <app-machine-summary
+      *ngFor="let item of realMetricList"
+      fxFlex="32"
+      [metric]="item"
+      [statistics]="singleData.statistics"
+      [histories]="singleData.statisticsHistory[item.historyKey]">
+    </app-machine-summary>
+  </div>
+  <div class="pareto-list" fxLayout="row wrap" fxLayoutAlign="space-between">
+    <app-pareto
+      fxFlex="49"
+      fxFlex.sm="100"
+      [data]="singleData.statistics.downtimePareto || []"
+      title="Top Downtime Reasons"
+      name="name"
+      type="Min"
+      value="durationMinutes"
+      occurances="instanceCount"
+      [topItems]="5">
+    </app-pareto>
+
+    <app-pareto
+      fxFlex="49"
+      fxFlex.sm="100"
+      [data]="singleData.statistics.scrapPareto || []"
+      title="Top Scrap Reasons"
+      name="name"
+      type="FT"
+      value="lengthFeet"
+      occurances="instanceCount"
+      [topItems]="5">
+    </app-pareto>
+
+  </div>
+  <!-- <app-timeline-x-axis
+    [height]="50"
+    [displayXDomain]="focusExtent"
+    [cursorTime]="cursor"
+    [width]="1920">
+
+  </app-timeline-x-axis> -->
+  
+</div>

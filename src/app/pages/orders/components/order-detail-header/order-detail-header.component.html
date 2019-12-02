@@ -1,0 +1,16 @@
+<div class="order-detail-header" fxLayout="row" fxLayoutAlign="space-between">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <button type="button" mat-icon-button [routerLink]="['../']">
+      <mat-icon class="back-icon">arrow_back</mat-icon>
+    </button>
+    <div fxLayout="column">
+      <div class="order-name">ORDER</div>
+      <div class="order-id">{{orderCode}} <span>{{customerName}}</span></div>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="end center">
+    <app-order-header-state *ngIf="status === 'Scheduled'"></app-order-header-state>
+    <div class="order-status">{{status}}</div>
+  </div>
+</div>

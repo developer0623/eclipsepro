@@ -1,0 +1,33 @@
+.inventory-coils-header {
+  height: 64px;
+  background-color: #5A82B1;
+  padding: 0 22px;
+  color: #FAF7FB;
+
+  .inventory-coils-title {
+    font-size: 21px;
+  }
+
+  .inventory-coils-filter {
+    width: 40vw;
+    font-size: 15px;
+    border-bottom: 1px solid #FAF7FB;
+    padding: 5px;
+    caret-color: #fff;
+
+    &::placeholder {
+      color: #FAF7FB
+    }
+  }
+}
+
+.inventory-coils {
+  mat-cell, mat-header-cell {
+    justify-content: center;
+    div {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  }
+}

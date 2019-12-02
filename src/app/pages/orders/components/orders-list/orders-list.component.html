@@ -1,0 +1,98 @@
+<div class="orders main-table" fxLayout="column">
+  <div class="orders-header" fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="orders-title">
+      Orders
+    </div>
+    <input class="orders-filter" matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </div>
+  <mat-table #table [dataSource]="dataSource" matSort [trackBy]="myTrackById">
+    <ng-container matColumnDef="orderCode">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Order Number</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row['orderCode'] }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="materialCode">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Material</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row['materialCode'] }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="toolingCode">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Tooling</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row['toolingCode'] }}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="totalFt">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Total (Ft)</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row['totalFt'] | number : '1.0-1' }}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="remainingFt">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Remaining (Ft)</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row['remainingFt'] | number : '1.0-1' }}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row['status'] }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="machineNumber">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Machine</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row['machineNumber'] }}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="sequence">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Sequence</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row['sequence'] }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="customerName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Customer</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <div>{{ row['customerName'] }}</div>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="requiredDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Required</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row['requiredDate'] | date : 'MM/dd/yy' }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="completeDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Completed</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row['completeDate'] }}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="estimatedCompleteTime">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Estimated</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row['estimatedCompleteTime'] }}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="importDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Imported</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row['importDate'] | date : 'MM/dd/yy' }}
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="visibleColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: visibleColumns;" (click)="gotoDetail(row)"></mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[10, 15, 20, 25]" showFirstLastButtons></mat-paginator>
+</div>

@@ -1,0 +1,22 @@
+.detail-header {
+  height: 64px;
+  background-color: #5A82B1;
+  padding: 0 22px;
+  color: #FAF7FB;
+
+  .machine-name {
+    font-size: 21px;
+    line-height: 25px;
+  }
+  .machine-sign {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .back-icon {
+    font-size: 30px;
+    line-height: 30px;
+    width: 30px;
+    height: 30px;
+  }
+}

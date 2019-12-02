@@ -1,0 +1,7 @@
+<mat-card class="task-item">
+  <app-task-header [task]="task"></app-task-header>
+  <app-task-active-content [task]="task" *ngIf="state == 1"></app-task-active-content>
+  <app-task-completed-content [task]="task" *ngIf="state == 2"></app-task-completed-content>
+  <app-task-active-footer [task]="task" [state]="state" *ngIf="state"></app-task-active-footer>
+  <app-task-current-footer [task]="task" *ngIf="!state"></app-task-current-footer>
+</mat-card>

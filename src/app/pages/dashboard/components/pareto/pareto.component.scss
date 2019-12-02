@@ -1,0 +1,44 @@
+:host {
+  
+}
+.app-pareto {
+  padding: 21px;
+  background-color: white;
+  .pareto-title {
+    font-size: 16px;
+  }
+  .pareto-row {
+    margin-top: 17px;
+    height: 25px;
+    font-size: 16px;
+    line-height: 25px;
+  }
+
+  @for $i from 1 through 6{
+    .pareto-row:nth-child(#{$i}) .pareto-rect {
+      $alphaT: (1-($i*.12));
+      background-color: rgba(170,170,170, $alphaT);
+    }
+  }
+  .pareto-body {
+    position: relative;
+    .pareto-rect {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+    }
+
+    .pareto-name {
+      text-transform: capitalize;
+    }
+  }
+
+  .pareto-value {
+    text-align: right;
+
+    span {
+      font-size: 12px;
+    }
+  }
+}

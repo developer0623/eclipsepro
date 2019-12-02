@@ -1,0 +1,38 @@
+:host {
+  position: relative;
+  font-size: 1.3rem;
+  perspective: 3000px;
+  padding: 12px;
+  outline: none;
+  cursor: pointer;
+}
+
+.ms-widget-front {
+  border-radius: 2px;
+  padding: 16px;
+  transition: transform 0.5s ease-out 0s, visibility 0s ease-in 0.2s, opacity 0s ease-in 0.2s;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+.state-container {
+  height: 23px;
+  margin-bottom: 16px;
+
+  .machine-title {
+    font-size: 1.4rem !important;
+  }
+}
+
+sup {
+  top: -.5em;
+  position: relative;
+  line-height: 0;
+  vertical-align: baseline;
+}
+
+.metric-name {
+  font-size: 1.4rem !important;
+  color: rgba(0,0,0,0.54);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

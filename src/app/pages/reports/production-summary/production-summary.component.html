@@ -1,0 +1,124 @@
+<div class="report-production-summary" fxLayout="column">
+  <div class="main-header" fxLayout="row" fxLayoutAlign="space-between center">
+    PRODUCTION SUMMARY
+  </div>
+  <mat-card class="summary-header" fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="duration-menu-column" fxLayout="row" fxLayoutAlign="start center">
+      <div class="menu-title">
+          DURATION:
+      </div>
+      <mat-menu #durationMenu="matMenu">
+        <button mat-menu-item *ngFor="let duration of durations" (click)="onClickDurationItem(duration)">
+          {{duration.title}}
+        </button>
+      </mat-menu>
+      <button class="menu-btn" mat-button [matMenuTriggerFor]="durationMenu">
+        {{selectedDuration.title}}
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+    </div>
+
+    <div class="shift-menu-column" fxLayout="row" fxLayoutAlign="start center">
+      <div class="menu-title">
+        SHIFT:
+      </div>
+      <mat-menu #shift1Menu="matMenu" class="production-summary-menu" xPosition="before">
+        <div class="menu-list-header">SHIFT:</div>
+        <button mat-menu-item *ngFor="let item of shiftMenu" (click)="onClickShiftMenuItem(item)">
+          <mat-checkbox [checked]="item.isChecked" aria-label="{{item.name}}">
+            {{item.name}}
+          </mat-checkbox>
+        </button>
+      </mat-menu>
+      <button class="menu-btn" mat-button [matMenuTriggerFor]="shift1Menu">
+        {{shiftMenuTitle}}
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+    </div>
+
+    <div class="date-container" fxFlex="none"  fxLayout="row" fxLayoutAlign="center center">
+      <mat-icon class="change-icon left-icon" (click)="onAddDate(-1)">chevron_left</mat-icon>
+      <p class="date-str" [innerHTML]="startDate.date | summaryDateFilter: endDate.date : selectedDuration.title"></p>
+      <mat-icon class="change-icon right-icon" (click)="onAddDate(1)">chevron_right</mat-icon>
+      <div class="date-picker-container">
+        <input matInput [matDatepickerFilter]="onlyAllowDate" [matDatepicker]="picker" [formControl]="formStartDate" (dateChange)="onChangeDate()">
+        <mat-datepicker #picker></mat-datepicker>
+      </div>
+      <mat-icon class="date-icon" (click)="picker.open()" *ngIf="selectedDuration.title !== 'Custom'">event</mat-icon>
+      <mat-icon class="date-icon" (click)="openCustomDateModal()" *ngIf="selectedDuration.title === 'Custom'">event</mat-icon>
+    </div>
+    <div class="menu-column" fxLayout="row" fxLayoutAlign="end center">
+      <div class="menu-title">
+          MACHINES:
+      </div>
+      <mat-menu #machineMenu="matMenu" class="production-summary-menu" xPosition="before">
+        <div class="menu-list-header">SHOW MACHINES:</div>
+        <button mat-menu-item (click)="onClickMachineMenuItem(-1)">
+          <mat-checkbox [checked]="allMachineItem.isChecked" [(indeterminate)]="machineIndeterminate" aria-label="All">
+              All
+          </mat-checkbox>
+        </button>
+        <button mat-menu-item *ngFor="let item of machines; let i = index;" (click)="onClickMachineMenuItem(i)">
+          <mat-checkbox [disableRipple]="true" [checked]="item.isChecked" aria-label="{{item.name}}">
+            {{item.name}}
+          </mat-checkbox>
+        </button>
+      </mat-menu>
+      <button class="menu-btn" mat-button [matMenuTriggerFor]="machineMenu">
+        {{selectedMachinesNum}}
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+    </div>
+    <div class="menu-column" fxLayout="row" fxLayoutAlign="end center">
+      <div class="menu-title">
+          MEASURE: {{selectedMeasure.title}}
+      </div>
+    </div>
+    <div class="menu-column" fxLayout="row" fxLayoutAlign="end center">
+      <button mat-icon-button aria-label="Print Preview" (click)="openPrintPreview()">
+        <mat-icon>print</mat-icon>
+      </button>
+    </div>
+  </mat-card>
+  <div class="summary-content padding">
+    <div class="machine-summary-header">
+      <div class="mh-column column-title">MACHINE</div>
+      <div class="mh-column column-good-scrap" >
+        <div [appSummaryTooltip]="headers.good">{{headers.good.title}}</div>
+      </div>
+      <div class="mh-column column-good-scrap">
+        <div [appSummaryTooltip]="headers.scrap">{{headers.scrap.title}}</div>
+      </div>
+      <div class="mh-column column-asy first-hide">
+        <div [appSummaryTooltip]="headers.reclaimed">{{headers.reclaimed.title}}</div>
+      </div>
+      <div class="mh-column column-running">
+        <div [appSummaryTooltip]="headers.throughput">{{headers.throughput.title}}</div>
+      </div>
+      <div class="mh-column column-oee-target">
+        <div [appSummaryTooltip]="headers.oee">{{headers.oee.title}}</div>
+      </div>
+      <div class="mh-column column-oee-target">
+        <div [appSummaryTooltip]="headers.target"><div>{{headers.target.title}}</div> <div>%</div></div>
+      </div>
+      <div class="mh-column column-asy first-hide">
+        <div [appSummaryTooltip]="headers.availability"><div>{{headers.availability.title}}</div> <div>%</div></div>
+      </div>
+      <div class="mh-column column-asy first-hide">
+        <div [appSummaryTooltip]="headers.speed"><div>{{headers.speed.title}}</div> <div>%</div></div>
+      </div>
+      <div class="mh-column column-asy first-hide">
+        <div [appSummaryTooltip]="headers.yield"><div>{{headers.yield.title}}</div> <div>%</div></div>
+      </div>
+      <div class="mh-column column-time-bar second-hide">TIME BAR</div>
+    </div>
+    <div class="machine-summary-list" *ngFor="let item of (summaryList$ | async); let i = index;">
+      <app-machine-summary [machine]="item.machineName" [data]='item' *ngIf="item.availability && machines[i].isChecked"></app-machine-summary>
+      <div class="summary-empty-item" *ngIf="!item.availability && machines[i].isChecked">
+        <div class="column-title">{{item.machineName}}</div>
+        <div class="column-content">No data available</div>
+      </div>
+    </div>
+
+  </div>
+</div>

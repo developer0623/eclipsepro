@@ -1,0 +1,486 @@
+.jobs-container .dropzone ul[dnd-list] {
+    
+  margin: 0px;
+  padding-left: 0px;
+}
+
+.jobs-container .dropzone li {
+  display: block;
+  width: 100%;
+}
+
+.jobs-container {
+  .dropzone {
+      height: calc(100vh - 200px);
+    //   overflow: auto;
+      
+  }
+
+  a {
+      color: rgba(0,0,0,0.87) !important;
+  }
+  
+}
+
+
+.rotate-text {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+
+  -webkit-writing-mode: vertical-rl;
+  -ms-writing-mode: tb-rl;
+  writing-mode: vertical-rl;
+  // text-orientation: upright;
+}
+
+.jobs-container .dndDragging {
+  opacity: 0.7;
+}
+
+
+.jobs-container .dndDraggingSource {
+  opacity: 0.5;
+}
+
+
+// .jobs-container .dndPlaceholder {
+//   background-color: green !important;
+//   display: block;
+//   // min-height: 42px;
+//   min-height: 3px;
+// }
+
+
+.jobs-container .itemlist {
+  min-height: 120px !important;
+}
+
+.jobs-container .itemlist > li {
+  background-color: #337ab7;
+  border: none;
+  border-radius: .25em;
+  color: #fff;
+  float: left;
+  font-weight: 700;
+  height: 50px;
+  margin: 5px;
+  padding: 3px;
+  text-align: center;
+  width: 80px;
+}
+
+.jobs-container .dropzone .container-element {
+  margin: 10px;
+}
+
+.group-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  min-height: 50px;
+  // max-height: $height;
+  position: sticky;
+  top: 0px;
+  background-color: red;
+
+//    white-space: nowrap;
+// overflow: hidden;
+// text-overflow: ellipsis;
+
+}
+
+.group-title-bg {
+  width: 10%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+
+}
+
+.group-item {
+  position: relative;
+  // pointer-events: none;
+}
+.strict-title {
+  position: sticky;
+  top: 0px;
+  bottom: 0px;
+}
+
+.tool-class {
+  background: rgb(236, 212, 129);
+  width: 10%;
+  // max-height: 100%;
+  // height: 2000px;
+}
+.coil-class {
+  background: rgb(249, 181, 112);
+  width: 20%;
+}
+
+.date-class {
+  background: rgb(186, 205, 113);
+}
+
+.key-content {
+  max-height: 80px;
+  text-align: center;
+  position: sticky;
+  top: 0px;
+  bottom: 0px;
+}
+
+.available-jobs {
+  .key-content {        
+      max-height: 36px;
+      overflow: hidden;        
+  }
+}
+.border-top-2 {
+  border-top: 2px solid white;
+}
+
+.border-bottom-2 {
+  border-bottom: 2px solid white;
+}
+
+.item-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0px solid green;
+  z-index: 0;
+  text-align: center;
+}
+.item-bg11 {    
+  width: 100%;
+  height: 100%;
+  border: 0px solid green;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item-bg22 {
+  padding: 10px 10px 0px 10px;
+  width: 100%;
+  height: 100%;
+  border: 0px solid green;
+  z-index: 0;
+  // text-align: center;
+}
+
+.assigned-jobs {
+    .dropzone{
+        // padding-top: 34px;
+        // position: relative;
+    }
+    .machine-jobs-container {
+        width: 75%;
+        height: 34px;
+        padding: 0 18px 0 7px;
+        margin-left: 25%;
+        border-radius: 0px 15px 0 0px;
+        .machine-jobs {
+            background: #CCCCCC;
+            height: 34px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 17px;
+        }
+    }
+  .tool-class {
+      border-right: 0px solid white;
+  }
+
+  .asjobs-grid-container {
+      padding: 0px 18px 0 7px !important;
+      position: relative;
+      .vertical-write-mode {           
+
+          -webkit-writing-mode: vertical-rl;
+          -ms-writing-mode: tb-rl;
+          writing-mode: vertical-rl;
+
+      }
+
+      .machine-area {
+          position: relative;
+          display: block;
+      }
+      .machine-area:hover {
+          .addToMachine {
+            // background: #CCCCCC;
+          }
+      }
+      .addToMachine {
+          left: 0px;
+          top: 0px;
+          position: absolute;
+          z-index: 200;
+          width: 100%;
+          height: 100%;
+          margin: 0px auto;
+          height: auto;
+          background: rgba(255, 255, 255, 0);
+          color: transparent;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: bold;
+          font-size: 2rem;
+      }
+      
+      .onmachine-container {
+          left: 0px;
+          top: 0px;
+          position: absolute;
+          z-index: -1;
+          width: 100%;
+          margin: 0px auto;
+          height: auto;
+          background: #CCCCCC;
+          border-radius: 0px 15px 15px 0px;
+          min-height: 100px;
+          span {
+              float: right;
+              width: 18px;
+              height: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+          }
+      }
+  }
+  
+  .row {
+      margin: 0px;
+  }
+
+  .jobitem-group-item {
+      height: 105px;
+      min-height: 105px;
+      background: rgb(186, 205, 113);
+      // padding: 10px 10px 0px 10px;
+      position: relative;
+
+      .job-id {
+          font-size: 1.7rem;
+          font-weight: bold;
+      }
+      .job-sys {
+          font-size: 1.4rem;
+          line-height: 1.5rem;
+      }
+
+      .job-state {
+          
+
+          p{
+              margin: 0px;
+              text-align: center;
+          }
+
+          .job-item-content {
+              font-weight: bold;
+               font-size: 1.1rem;
+          }
+      }
+  }
+
+  .timeline-container {
+      padding: 0px;
+      padding-bottom: 10px;
+      top: 8px;
+      .date-time {
+          position: relative;
+          display: block;
+          .date-part {
+              position: absolute;
+              left: 0px;
+              top: 65px;
+              z-index: 10;
+              background-color: white;
+              color: #DBA456;
+              font-weight: bold;
+          }           
+
+          .time-item {
+              width: 100%;
+              height: 105px;
+              display: flex;
+              align-items: flex-end;
+              justify-content: flex-end;
+
+              .time-item-content {
+                  margin: 0px;
+                  padding-right: 7px;
+                  position: relative;
+                  right: -7px;
+              }
+              .time-item-content:before{
+                  content:"";
+                  position: absolute;
+                  bottom: 9px;
+                  right: 0px;
+                  width: 5px;
+                  height: 1px;
+                  background-color: rgba(0, 0, 0, 0.6);
+
+              }
+          }
+          
+      }
+
+      .date-time:first-child:before {
+          height: 17px;
+
+      }
+      .date-time:last-child:before {
+          bottom: 10px;
+
+      }
+
+      .date-time:before{
+              content:"";
+              position: absolute;
+              bottom: 0px;
+              left: 20px;
+              width: 1px;
+              height: 100%;
+              background: rgb(236, 212, 129);
+      }
+
+  }
+
+  .group-content {
+      padding: 0px;
+  }
+
+//   .dndDragover {
+//     border-top-width: 2px;
+//     border-bottom-width: 0px;
+//   }
+
+//     .dndDragover-before {
+//         border-top-width: 0px;
+//         border-bottom-width: 2px;
+//     }
+}
+
+.available-jobs {
+
+    .avajobs-main-content {
+        overflow-x: auto;
+        overflow-y: hidden;
+        display: block;
+        width: 100%;
+        height: 100%;
+
+    }
+    .scroll {
+        overflow: auto;
+    }
+
+    .dropzone {
+        border: 0px solid green;
+        &.dndDragover {
+            border-width: 2px;
+        }
+    }
+
+    .main-item {
+        border-left: 1px solid white;
+        border-right: 1px solid white;
+
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // background: rgb(186, 205, 113);
+        text-align: center;
+        min-width: 33%;
+         // white-space: nowrap;
+         //  overflow: hidden;
+         //  text-overflow: ellipsis;
+    }
+
+    .title-avail-jobs {
+        // margin-bottom: 0px;
+        // padding-top: 15px;
+    }
+
+    .ava-menu {
+        // margin-top: 5px;
+        position: relative;
+        width: 100%;
+        display: block;
+        height: 34px;
+        overflow: hidden;
+
+        .ava-menu-content {
+            left: 0px;
+            top: 0px;
+            min-width: 100%;
+            position: absolute;
+            display: flex;
+            [hidden] {
+                display: none !important;
+             }
+        }
+        // overflow: auto;
+        .menu-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-transform: uppercase;
+            padding: 7px 0;
+            float: left;
+            position: relative;
+            text-align: center;
+            font-size: 13px;
+        }
+        
+    }
+
+    .search-container {
+        .search-div {
+            margin-bottom: 5px;
+            float: right;
+            margin-top: -11px;
+            box-shadow: none !important;
+            .helpIconDiv {
+                padding: 24px 0 6px 24px !important;
+                cursor: pointer;
+                md-icon {
+                    svg {
+                        fill: #545454;
+                    }
+                }
+            }
+        }
+        .addColumn {
+            display: block;
+            border-bottom: 1px solid #bbb;
+            padding-left: 7px !important;
+            color: #bbb;
+            padding: 5px;
+        }
+    }
+}
+
+.goto-href {
+    margin: 0;
+}

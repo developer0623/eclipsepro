@@ -1,0 +1,54 @@
+<div class="warehouse-settings" fxLayout="column">
+  <div class="main-header" fxLayout="row" fxLayoutAlign="space-between center">
+    WAREHOUSE: APP SETTINGS
+  </div>
+  <div class="settings-content">
+    <mat-tab-group dynamicHeight class="warehouse-settings-tabs">
+      <mat-tab label="GENERAL">
+        <div class="padding warning-tab">
+          <h4>Warning Time</h4>
+          <mat-form-field>
+            <mat-select [(ngModel)]="selectedTime">
+              <mat-option *ngFor="let time of warningTimes" [value]="time.value">
+                {{time.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </mat-tab>
+      <mat-tab label="ERROR REASONS">
+        <div class="padding">
+          <mat-list class="nonprefered-reason-list" *ngFor="let reasonSet of reasons">
+            <h3 mat-subheader class="md-no-sticky">{{reasonSet.codeSetName}}</h3>
+            <mat-list-item  *ngFor="let reason of reasonSet.content" class="reason-item">
+              <i class="icon-menu "></i>
+              <p class="error-title"> {{ reason.reason }} </p>
+              <i class="icon-close" (click)="removeReson(reason)"></i>
+            </mat-list-item>
+
+            <mat-list-item class="add-item" (click)="gotoAddReason(reasonSet.key)">
+              <i class="icon-plus"></i>
+              <p class="error-title">Add New Reason</p>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-tab>
+      <mat-tab label="LOCATIONS">
+        <div class="padding">
+          <mat-list class="wrongcoil-reason-list" *ngFor="let locationArray of locations">
+            <h3 mat-subheader class="md-no-sticky">{{locationArray.title}}</h3>
+            <mat-list-item  *ngFor="let location of locationArray.items" class="reason-item">
+              <i class="icon-menu "></i>
+              <p class="error-title"> {{ location.name }} </p>
+            </mat-list-item>
+
+            <mat-list-item class="add-item" *ngIf="!locationArray.doNotEdit" (click)="gotoAddLocation(locationArray)">
+              <i class="icon-plus"></i>
+              <p class="error-title">Add New Area</p>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

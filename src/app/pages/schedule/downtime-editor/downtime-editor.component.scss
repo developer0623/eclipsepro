@@ -1,0 +1,25 @@
+.downtime-list {
+  width: 100%;
+}
+.downtime-list-item {
+  border-bottom: 1px solid #dddddd;
+  .downtime-title {
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .downtime-occurs {
+      font-size: 15px;
+      color: rgba(0, 0, 0, 0.6);
+      font-weight: 500;
+  }
+  .downtime-div {
+      width: 100%;
+  }
+}
+
+.downtime-add-btn {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  background-color: #5A82B1;
+}

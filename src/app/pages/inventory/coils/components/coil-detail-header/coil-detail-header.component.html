@@ -1,0 +1,21 @@
+<div class="coil-detail-header" fxLayout="row" fxLayoutAlign="space-between">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <button type="button" mat-icon-button [routerLink]="['../']">
+      <mat-icon class="back-icon">arrow_back</mat-icon>
+    </button>
+    <div fxLayout="column">
+      <div class="coil-name">COILS:</div>
+      <div class="coil-id">{{id}} <span>{{description}}</span></div>
+    </div>
+  </div>
+
+  <div fxLayoutAlign="end center">
+    <div class="coil-material">
+      Material:<span class="material-value" (click)="gotoMaterialDetail(material)">{{material}}</span>
+    </div>
+    <div class="coil-balance">
+      Balance:<span class="balance-value">{{balance | number : '1.0-1'}}</span>
+      <span class="balance-unit">FT</span>
+    </div>
+  </div>
+</div>

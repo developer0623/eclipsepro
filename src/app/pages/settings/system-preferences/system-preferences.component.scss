@@ -1,0 +1,21 @@
+.preference-table {
+  width: 500px;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 14px;
+  thead tr {
+    height: 51px;
+  }
+  tr {
+    min-height: 37px;
+  }
+  td, th {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    text-align: left;
+    padding: 0 10px;
+  }
+
+  .first-col {
+    width: 25%;
+  }
+}

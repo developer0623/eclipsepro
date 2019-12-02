@@ -1,0 +1,47 @@
+.warning-tab {
+  font-size: 16px;
+  .mat-form-field-flex {
+    background-color: transparent !important;
+    padding: 0;
+  }
+  .mat-select-arrow-wrapper {
+    transform: translateY(0) !important;
+  }
+  .mat-form-field-infix {
+    padding: 0.3em 0;
+  }
+  mat-form-field {
+    padding: 2px;
+  }
+}
+.nonprefered-reason-list, .wrongcoil-reason-list {
+  width: 600px;
+  margin: 10px 50px 30px;
+  padding-bottom: 0px;
+  box-shadow:0px 0px 10px 2px rgba(0, 0, 0, 0.5);
+
+  .mat-subheader {
+    margin: 0 !important;
+    font-size: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  }
+
+  .reason-item{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  }
+  .icon-menu, .icon-plus {
+    margin-right: 32px;
+  }
+  .icon-close {
+    cursor: pointer;
+  }
+
+  .add-item {
+    cursor: pointer;
+  }
+
+  .error-title {
+    font-size: 18px;
+    margin-right: auto;
+  }
+}

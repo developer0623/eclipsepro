@@ -1,0 +1,20 @@
+<div class="downtime-editor padding" fxLayout="row">
+  <mat-list class="downtime-list">
+    <mat-list-item class="downtime-list-item" *ngFor="let downtime of downtimes" (click)="showDowntimeDetailsModal(downtime, true)">
+      <div class="downtime-title" matLine>{{downtime.title}}</div>
+      <div class="downtime-occurs" matLine>
+        <span>{{downtime | repeatText}}</span>
+        <span>&nbsp;at&nbsp;</span>
+        <span>{{downtime.timeOfDay | buildDuration: false}}</span>
+        <span>&nbsp;for&nbsp;</span>
+        <span>{{downtime.duration | buildDuration: true}}</span>
+        <span>&nbsp;as&nbsp;</span>
+        <span>{{downtime.activityType}}</span>
+      </div>
+      <div class="downtime-occurs" matLine>{{ downtime.machinesText }}</div>
+    </mat-list-item>
+  </mat-list>
+  <button mat-fab class="downtime-add-btn" (click)="showDowntimeDetailsModal(null, false)">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

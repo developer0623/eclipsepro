@@ -1,0 +1,13 @@
+<div class="tag machine-status-tag" fxLayout="row" fxLayoutAlign="start center" *ngIf="!isSchedule">
+  <!-- <mat-icon *ngIf="isOffline" md-font-icon="icon-close-network" class="icon" style="padding-right:40px"></mat-icon> -->
+  <div class="run-state-time tag-label text-nowrap" [innerHtml]="lastRunStateChange | taskActiveAgo"></div>
+  <i [ngClass]="{ 'icon-play': state=='R', 'icon-close-circle-outline': state=='O', 'icon-stop': state=='H' }"></i>
+</div>
+<div class="tag machine-status-tag schedule-run-state" fxLayout="row" fxLayoutAlign="start center" *ngIf="isSchedule">
+  <i [ngClass]="{ 'icon-play': state=='R', 'icon-close-circle-outline': state=='O', 'icon-stop': state=='H' }"></i>
+  <!-- <mat-icon *ngIf="isOffline" md-font-icon="icon-close-network" class="icon" style="padding-right:40px"></mat-icon> -->
+  <div class="run-state-time tag-label text-nowrap">
+    <span class="for-text">for&nbsp;</span>
+    <span [innerHtml]="lastRunStateChange | taskActiveAgo"></span>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div mat-dialog-title class="custom-dialog-toolbar" fxLayout="row" fxLayoutAlign="space-between center">
+  Add Reason
+  <button mat-icon-button aria-label="Close Icon" (click)="onModalClose()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div mat-dialog-content>
+  <mat-form-field class="full-width">
+    <mat-label>CodeSet</mat-label>
+    <mat-select [(ngModel)]="data.codeSet">
+      <mat-option *ngFor="let item of errorList" [value]="item.key">
+        {{item.displayName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <input matInput placeholder="Reason" [(ngModel)]="data.reason">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions align="center">
+  <button mat-button [mat-dialog-close]="data.reason" class="add-btn" cdkFocusInitial>ADD</button>
+</div>

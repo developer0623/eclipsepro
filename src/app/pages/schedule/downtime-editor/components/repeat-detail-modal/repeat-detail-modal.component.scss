@@ -1,0 +1,137 @@
+.repeat-dialog {
+  .mat-form-field-flex {
+    background-color: transparent !important;
+    padding: 0;
+  }
+  .mat-select-arrow-wrapper {
+    transform: translateY(0) !important;
+  }
+  .mat-form-field-infix {
+    padding: 0.3em 0;
+  }
+  mat-form-field {
+    padding: 2px;
+  }
+  .cancel-btn {
+    margin-left: auto !important;
+    color: #5A82B1;
+  }
+  .save-btn {
+    background-color: #5A82B1;
+    color: white !important;
+  }
+}
+
+.repeat-dialog-content {
+  text-align: center;
+  padding: 15px 0 23px 0;
+  &.paddingBottom {
+    padding-bottom: 35px;
+  }
+  .common-content {
+      display: inline;
+      font-size: 15px;
+      .option-label {
+          padding-left: 15px;
+      }
+      .side-label {
+          font-size: 15px;
+          margin-left: 5px;
+          color: #000000;
+      }
+      .mat-form-field {
+          width: 20%;
+          font-size: 15px;
+          font-weight: 400;
+          color: #000000;
+          margin: 0 30px;
+          &.frequency-input {
+              margin-left: 10px;
+          }
+          &.every-input {
+              margin-right: 0;
+          }
+          .mat-select-value {
+              padding-left: 10px;
+              padding-bottom: 5px;
+              text-align: left;
+          }
+
+      }
+  }
+  .week-content {
+      float: right;
+      padding: 20px;
+      .week-day {
+          font-size: 14px;
+          margin: 2px;
+          color: #000000;
+          cursor: pointer;
+          font-weight: 500;
+          width: 38px;
+          display: inline-block;
+          padding: 10px 9px 9px;
+          &.isChecked {
+              color: #fff;
+              background: #5A82B1;
+              border-radius: 34px;
+          }
+          input {
+              display: none;
+          }
+      }
+  }
+  .month-content {
+      width: 60%;
+      margin: 20px auto;
+      display: inline-block;
+      mat-radio-button {
+          font-size: 15px;
+          color: gray;
+          display: inline;
+          margin: 25px;
+      }
+      .onTheDiv {
+          margin: 20px 0;
+          .mat-form-field {
+              width: auto;
+              font-size: 14px;
+              text-align: left;
+              margin: 0 15px;
+              .mat-select-value {
+                  padding-left: 10px;
+              }
+          }
+      }
+      .calendar {
+          display: block;
+          margin-top: 25px;
+          .calendar-table {
+              display: inline;
+              tr {
+                  td {
+                      width: 38px;
+                      height: 45px;
+                      span {
+                          &.today {
+                              color: #5A82B1;
+                          }
+                          &.active {
+                              background-color: #5A82B1;
+                              border-radius: 35px;
+                              color: #ffffff !important;
+                          }
+                          font-size: 14px;
+                          font-weight: 500;
+                          margin: 3px;
+                          cursor: pointer;
+                          padding: 10px 11px;
+                          display: block;
+                      }
+                  }
+              }
+          }
+      }
+  }
+
+}

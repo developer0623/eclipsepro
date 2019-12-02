@@ -1,0 +1,99 @@
+$main-font: 9px;
+$span-font: 8px;
+.print-summary-timebar {
+  display: flex;
+  font-size: 9px;
+  &__machine {
+      width: 13%;
+      .machine-timebar {
+          line-height: 25px;
+          text-align: right;
+          padding-right: 5px;
+          font-size: 11px;
+      }
+  }
+
+  &__body {
+      flex: 1;
+      .timebar-header {
+          display: flex;
+          height: 25px;
+          background-color: #dddddd !important;
+          justify-content: space-between;
+          align-items: center;
+          &__item {
+              display: flex;
+              align-items: baseline;
+          }
+          &.is_1117 {
+              .timebar-header__item {
+                  flex-direction: column;
+                  align-items: center;
+              }
+          }
+
+          &__title {
+              display: flex;
+          }
+
+          &__circle {
+              width: 6px;
+              height: 6px;
+              border-radius: 3px;
+              margin: 2px 3px 0 3px;
+              &.column-running {
+                  background-color: #303030;
+              }
+              &.column-changeover {
+                  background-color: #666666;
+              }
+              &.column-breakdown {
+                  background-color: #a63337;
+              }
+              &.column-other {
+                  background-color: #878787;
+              }
+              &.column-expert {
+                  background-color: #c4c4c4;
+              }
+              &.timebar-unschedule {
+                  background-color: #efefef;
+              }
+
+          }
+          &__body {
+              margin-left: 4px;
+              font-size: 10px;
+              font-weight: 500;
+              span {
+                  font-size: $span-font;
+                  font-weight: 300;
+              }
+          }
+      }
+      .chart-content {
+          display: flex;
+          padding-top: 3px;
+          height: 13px;
+
+          .main-area {
+              height: 10px !important;
+              border: none;
+          }
+      }
+  }
+  &__bottom {
+      display: flex;
+      margin: 2px 0 1px 0;
+      height: 9px;
+      align-items: center;
+      border: 1px solid gray;
+      border-top: none;
+      border-bottom: none;
+  }
+  &__line {
+      flex: 1;
+      height: 1px;
+      background: gray;
+  }
+}

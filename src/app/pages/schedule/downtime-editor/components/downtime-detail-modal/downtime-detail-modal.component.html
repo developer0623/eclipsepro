@@ -1,0 +1,103 @@
+<div mat-dialog-title class="custom-dialog-toolbar" fxLayout="row" fxLayoutAlign="space-between center">Planned Downtime Details</div>
+<div mat-dialog-content class="downtime-dialog-content">
+  <mat-form-field class="title-div" floatLabel="Downtime Title">
+    <mat-label>Downtime Title</mat-label>
+    <input matInput [(ngModel)]="downtime.title" required>
+  </mat-form-field>
+  <div class="dialog-bottom-content">
+    <mat-form-field class="downtime-type">
+      <mat-label class="typeLabel">Type</mat-label>
+      <mat-select [(ngModel)]="downtime.activityType" required placeholder="Select" aria-label="activityType">
+        <mat-option *ngFor="let type of types" [value]="type">{{type}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="date-container">
+      <input matInput [(ngModel)]="downtime.startDate" [matDatepicker]="from" placeholder="Starts">
+      <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+      <mat-datepicker #from></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="downtime-time">
+      <mat-select [(ngModel)]="startTime.hours" aria-label="startTime hours">
+        <mat-option *ngFor="let hour of hours" [value]="hour">{{hour}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <span>:</span>
+    <mat-form-field class="downtime-time">
+      <mat-select [(ngModel)]="startTime.mins" aria-label="startTime mins">
+        <mat-option *ngFor="let min of mins" [value]="min">{{min}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="downtime-time">
+      <mat-select [(ngModel)]="startTime.meridian" aria-label="startTime meridian">
+        <mat-option *ngFor="let meridian of meridianData" [value]="meridian">{{meridian}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="downtime-duration margin-left20">
+      <mat-label class="durationLabel">Duration</mat-label>
+      <mat-select [(ngModel)]="duration.hours" aria-label="duration hours">
+        <mat-option *ngFor="let hour of durationHours" [value]="hour"> {{hour}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <span class="side-label">Hrs</span>
+    <mat-form-field class="downtime-duration">
+      <mat-select [(ngModel)]="duration.mins"  aria-label="duration mins">
+        <mat-option *ngFor="let min of durationMins" [value]="min"> {{min}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <span class="side-label">Mins</span>
+  </div>
+  <div class="downtime-repeat-details">
+    <mat-form-field *ngIf="!downtime.occursText" class="downtime-type">
+      <mat-label class="repeatLabel">Repeat</mat-label>
+      <mat-select [(ngModel)]="downtime.occurs" (selectionChange)="openRepeatPopup()" placeholder="Select" aria-label="occurs">
+        <mat-option *ngFor="let item of repeatData" [value]="item.value">{{item.label}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="button-text-container" (click)="openRepeatPopup()" *ngIf="downtime.occursText">
+      <span class="text-lable">Repeat</span>
+      <div class="repeat-button">
+        <span>{{downtime.occursText}}</span>
+        <div class="mat-select-arrow"></div>
+      </div>
+    </div>
+    <mat-form-field *ngIf="downtime.occurs !== 'OneTime'" class="downtime-duration">
+      <mat-label class="repeatLabel">End Repeat</mat-label>
+      <mat-select [(ngModel)]="downtime.endRepeat" placeholder="Select" aria-label="endRepeat">
+        <mat-option *ngFor="let item of endRepeatData" [value]="item.value"> {{item.label}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field *ngIf="downtime.endRepeat === 'After' && downtime.occurs !== 'OneTime'" class="downtime-duration">
+      <mat-select [(ngModel)]="downtime.occurenceCount" aria-label="Occurence Count">
+        <mat-option *ngFor="let count of repeatCount" [value]="count">{{count}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <span class="side-label" *ngIf="downtime.endRepeat === 'After' && downtime.occurs !== 'OneTime'">Time(s)</span>
+    <mat-form-field *ngIf="downtime.endRepeat === 'OnDate' && downtime.occurs !== 'OneTime'">
+      <input matInput [(ngModel)]="downtime.endDate" [matDatepicker]="end" placeholder="Enter date">
+      <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
+      <mat-datepicker #end></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" class="machines-select">
+    <mat-form-field>
+        <mat-label class="typeLabel">Machines</mat-label>
+        <mat-select [(ngModel)]="selectedMachines" required placeholder="Select" aria-label="selected machines" class="downtime-type" multiple>
+          <mat-optgroup label="machines">
+            <mat-option [value]="machine" *ngFor="let machine of machinesData">{{machine.description}}</mat-option>
+          </mat-optgroup>
+        </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+<div class="btn-group-contanier" mat-dialog-actions fxLayout="row">
+  <button class="delete-btn" mat-button color="warn" *ngIf="showDelete" (click)="deleteDowntime(true)">Delete</button>
+  <button class="cancel-btn" mat-button mat-dialog-close>Cancel</button>
+  <button
+    class="add-btn" mat-button cdkFocusInitial
+    [disabled]="!downtime.title || !downtime.activityType || !selectedMachines"
+    (click)="saveDowntimeDetails(false)"
+  >
+    Save
+  </button>
+</div>

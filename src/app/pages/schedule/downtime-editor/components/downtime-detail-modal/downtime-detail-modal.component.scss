@@ -1,0 +1,98 @@
+.downtime-dialog {
+  .mat-dialog-container {
+    padding-bottom: 24px !important;
+    min-height: 500px;
+  }
+  .cancel-btn {
+    margin-left: auto !important;
+  }
+  .btn-group-contanier {
+    margin-top: 100px;
+    padding: 20px;
+  }
+}
+
+.downtime-dialog-content {
+  position: relative;
+  .dialog-bottom-content {
+      position: relative;
+      font-size: 16px;
+  }
+  .title-div {
+    width: 100%;
+    font-size: 17px;
+    font-weight: 400 !important;
+  }
+  .side-label {
+      margin-right: 25px;
+      color: #000000;
+      font-size: 15px;
+      font-weight: 500;
+  }
+
+  .downtime-type {
+    min-width: 160px;
+    margin-right: 20px;
+  }
+  .downtime-duration {
+      width: 120px;
+      margin-right: 10px;
+  }
+
+  .margin-left20 {
+    margin-left: 20px;
+  }
+
+  .downtime-time {
+    width: 35px;
+    .mat-select-value {
+      min-width: 35px !important;
+      text-align: center;
+      padding-left: 0;
+    }
+    .mat-select-arrow-wrapper {
+      display: none !important;
+    }
+  }
+
+  .date-container {
+    .mat-form-field-suffix {
+      top: 6px;
+    }
+  }
+
+  .downtime-repeat-details {
+    margin-top: 20px;
+    font-size: 16px;
+    .button-text-container {
+      position:relative;
+      display: inline-block;
+      height: 67px;
+      .text-lable {
+          position: absolute;
+          top: 1px;
+          left: 1px;
+          color: rgba(0, 0, 0, 0.6);
+          font-size: 12px;
+      }
+      .repeat-button {
+          border-bottom: 1px solid rgba(0, 0, 0, 0.54);
+          margin-right: 20px;
+          padding: 1.14375em 0 0.3em 0;
+          display: flex;
+          align-items: center;
+          min-width: 180px;
+          justify-content: space-between;
+          span {
+              text-transform: capitalize;
+              font-weight: normal;
+          }
+      }
+    }
+
+  }
+  .machines-select {
+    font-size: 16px;
+  }
+
+}

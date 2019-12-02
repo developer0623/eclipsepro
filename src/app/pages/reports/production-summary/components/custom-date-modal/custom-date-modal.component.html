@@ -1,0 +1,34 @@
+<div mat-dialog-title class="custom-dialog-toolbar" fxLayout="row" fxLayoutAlign="space-between center">CUSTOM DATE SELECTION</div>
+<div mat-dialog-content>
+  <div fxLayout='row' fxLayoutAlign="space-between center">
+    <div fxLayout='column' fxLayoutAlign="center center" fxFlex>
+      <mat-form-field class="date-container">
+        <input matInput [matDatepicker]="fromPicker" placeholder="Beginning" [formControl]="formStartDate" (dateChange)="onChangeStartDate()">
+        <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+        <mat-datepicker #fromPicker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="date-container">
+        <input matInput [matDatepickerFilter]="onlyAllowDate" [matDatepicker]="endPicker" placeholder="Ending" [formControl]="formEndDate" (dateChange)="onChangeEndDate()">
+        <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+        <mat-datepicker #endPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div fxLayout='row' fxLayoutAlign="center center" fxFlex>
+      <mat-form-field class="duration-input">
+        <input matInput placeholder="For Duration" [(ngModel)]="durationLength" (ngModelChange)="onChangeDuration()">
+      </mat-form-field>
+      <mat-form-field class="duration-select">
+        <mat-select [(ngModel)]="selectedDuration" aria-label="duration" (selectionChange)="onChangeDuration()">
+          <mat-option *ngFor="let item of durations" [value]="item"> {{item}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</div>
+
+<div class="btn-group-contanier" mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
+  <button class="cancel-btn" mat-button mat-dialog-close>Cancel</button>
+  <button class="add-btn" mat-button cdkFocusInitial (click)="saveCustomDate(false)">
+    Apply
+  </button>
+</div>

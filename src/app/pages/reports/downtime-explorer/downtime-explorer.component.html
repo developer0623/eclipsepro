@@ -1,0 +1,44 @@
+<div class="report-downtime-explorer" fxLayout="column">
+  <div class="main-header" fxLayout="row" fxLayoutAlign="space-between center">
+    Downtime
+  </div>
+  <div class="timebar-content">
+    <app-timebar-chart
+      [filterStart]="filterStartDate"
+      [filterEnd]="filterEndDate"
+      (filterChange)='onFilterRangeChange($event)'
+    ></app-timebar-chart>
+  </div>
+  <mat-card class="second-timebar">
+    <div class="chart-controll-bar">
+      <div class="date-control">
+        <button mat-icon-button (click)="moveFilterDate(-1)">
+          <mat-icon>keyboard_arrow_left</mat-icon>
+        </button>
+        <span class="date-control-content">{{filterStartDate | date : 'MMM d, y'}} <span class="minus-sign">-</span> {{filterEndDate | date : 'MMM d, y'}}</span>
+        <button mat-icon-button (click)="moveFilterDate(1)">
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+      </div>
+    </div>
+    <app-dc-timebar-chart
+      [dimension]="cfData.byDayDimension"
+      [group]="cfData.byDayGroup"
+      [startDate]="filterStartDate"
+      [endDate]="filterEndDate"
+    >
+    </app-dc-timebar-chart>
+
+  </mat-card>
+  <div class="main-content" fxLayout="row wrap" fxLayoutGap="16px grid">
+    <app-dc-pareto-chart
+      *ngFor="let item of chartList"
+      [dimension]="cfData[item.dimension]"
+      [group]="cfData[item.group]"
+      [topCount]="8"
+      [title]="item.title"
+      fxLayout="column" fxFlex="25" fxFlex.sm="50" fxFlex.xs="100"
+    >
+    </app-dc-pareto-chart>
+  </div>
+</div>

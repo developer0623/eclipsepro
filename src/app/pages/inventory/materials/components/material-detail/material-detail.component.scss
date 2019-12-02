@@ -1,0 +1,27 @@
+.material-detail-content {
+  height: 90px;
+  padding: 16px 53px;
+  .content-item {
+    margin-left: 25px;
+    font-size: 12px;
+    color: #6F7070;
+  }
+
+  .content-value {
+    font-size: 17px;
+    color: #424243;
+    margin-left: 10px;
+  }
+
+  .content-item-1 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 12px;
+    color: #6F7070;
+  }
+}
+.material-detail-tab {
+  padding: 0 24px;
+}

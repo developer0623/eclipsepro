@@ -1,0 +1,255 @@
+<ng-template #assGrTemplate let-node="node">
+    <div class="group-item" fxLayout="row" 
+        dndEffectAllowed='move' [dndDraggable]="node" dndType='ava'
+        (dndMoved)="dragOnAvailJobs($event, node)"
+    >
+        <div class="group-title border-bottom-2 strict-title"
+            [ngStyle]="getMaxHeightWithStyle(dropZoneHeight, node.style)"
+            (dblclick)="onDbClickAvailableItem(node)"
+        >
+            <div class="key-content">
+                <span *ngIf="!node.sref">{{node.key}}</span>
+                <p class="goto-href" *ngIf="node.sref">{{node.key}}</p>
+            </div>
+        </div>
+        <div fxLayout="column" fxFlex="1 1 auto" class="group-content" *ngIf="node.items.length > 0">
+            <div  *ngFor="let item of node.items">
+                <ng-container *ngTemplateOutlet="assGrTemplate; context: {node: item}"></ng-container>
+            </div>
+        </div>
+  </div>
+</ng-template>
+
+
+<div class="jobs-container" fxLayout="row wrap">
+    <div fxFlex="40" class="assigned-jobs">
+        <h3 class="margin-top-33">ASSIGNED JOBS ({{(selectScheduledJobsOldTree$|async).scheduledJobCount}})</h3>
+        <div class="machine-jobs-container" [ngStyle]="(selectScheduledJobsOldTree$|async).machineStyle"
+            [dndDropzone]="['ass', 'ava']" dndAreaType='machine'
+            (dndDrop)="dropToMachine($event)"
+        >
+            <div class="machine-jobs">{{(selectScheduledJobsOldTree$|async).numberOfJobsonMachine}} Jobs on Machine</div>
+        </div>
+        <perfect-scrollbar class="dropzone" #assScrollBar (psScrollY)="onChangePosition()">
+            
+            <div id="dropzone-id" fxLayout="row"  *ngIf="(selectScheduledJobsOldTree$|async).scheduledJobCount>0">
+                <div fxFlex="25" class="timeline-container">
+                    <div class="date-time time-bar" *ngFor="let date of (selectScheduledJobsOldTree$|async).dateAndTime">
+                        <div class="date-part">{{date.date | date : 'EEE M/d'}}</div>
+                        <div class="time-item" *ngFor="let time of date.times">
+                        <p class="time-item-content">{{time}}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div fxFlex="75" fxLayout="column" class="group-content asjobs-grid-container">
+                    <div id="onMachineContainer" class="onmachine-container" [ngStyle]="getHeight((selectScheduledJobsOldTree$|async).containerHeight)">
+                        <span class="span-content white-space-inherit text-center as-block-content vertical-write-mode">ON MACHINE</span>
+                    </div>
+                    
+                    <div class="machine-area" [dndDropzone]="['ass', 'ava']" dndAreaType='machine'
+                        (dndDrop)="dropToMachine($event)"
+                    >
+                        <div id="addToMachine" class="addToMachine" [ngStyle]="getHeight((selectScheduledJobsOldTree$|async).containerHeight)">
+                            Add to machine
+                        </div>
+                        <div *ngFor="let group1 of jobsOnMachine;"                             
+                            class="group-item" fxLayout="row">
+
+                            <div class="group-title tool-class border-bottom-2 strict-title" [ngStyle]="getMaxHeight(dropZoneHeight)">
+                                <div class="rotate-text key-content">{{group1.key}}</div>
+                            </div>
+
+                            <div fxFlex="90" fxLayout="column" class="group-content">
+                                <div fxLayout="row" *ngFor="let group2 of group1.items;" class="group-item">
+                                    
+                                    <div class="group-title coil-class border-bottom-2 strict-title">
+                                        <div class="rotate-text key-content">
+                                            <p class="goto-href">{{group2.key}}</p>
+                                        </div>
+                                    </div>
+                                    <div fxFlex="80" fxLayout="column" class="group-content">
+                                        <div *ngFor="let group3 of group2.jobs;"
+                                            class="jobitem-group-item border-bottom-2" fxLayout="column"
+                                        >
+                                            <div class="item-bg22" fxLayout="column">
+                                                <div fxLayout="row" class="job-id" fxFlex="25">
+                                                    <div>
+                                                        <p class="goto-href">{{group3.orderCode}}</p>
+                                                    </div>
+                                                    
+                                                </div>
+
+                                                <div fxLayout="row" class="job-sys">{{group3.customerName}}</div>
+                                                <div fxLayout="row" class="job-state" fxFlex="40">
+                                                    <div fxFlex="40">
+                                                        <p class="job-item-title">Complete:</p>
+                                                        <p class="job-item-content">{{group3.completePct | unitsFormat :"%":0}}</p>
+                                                    </div>
+                                                    <div fxFlex="60">
+                                                        <p class="job-item-title">Remaining:</p>
+                                                        <p class="job-item-content">{{group3.remainingFt | taskLenghFilter}} ft <span style="font-style: italic"> {{group3.remainingRuntime | timeSpan}}</span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                <div *ngFor="let group1 of (selectScheduledJobsOldTree$|async).assignedJobs; let i = index;"                             
+                    class="group-item" fxLayout="row"
+                    dndEffectAllowed='move' [dndDraggable]="group1" [dndType]="'ass'"
+                    (dndMoved)="dragOnScheduleJobs($event, i, group1.jobs)"
+                >
+                    <div class="group-title tool-class border-bottom-2 strict-title" 
+                        (dblclick)="onDbClickScheduled(group1.jobs)" [ngStyle]="getMaxHeight(dropZoneHeight)">
+                        <div class="item-bg11" dndAreaType='ass' [dndDropGroup]="group1"
+                            [dndDropzone]="['ass', 'ava']" (dndDrop)="dropToSchedule($event)">
+                            <div class="rotate-text key-content">{{group1.key}}</div>
+                        </div>
+                        
+                    </div>
+
+                    <div fxFlex="90" fxLayout="column" class="group-content">
+                        <div *ngFor="let group2 of group1.items; let ii = index;"
+                            fxLayout="row" class="group-item"
+                            dndEffectAllowed='move' [dndDraggable]="group2" [dndType]="'ass'"
+                            (dndMoved)="dragOnScheduleJobs($event, ii, group2.jobs)"
+                        >
+                        
+                            <div class="group-title coil-class border-bottom-2 strict-title" 
+                                (dblclick)="onDbClickScheduled(group2.jobs)">
+                                <div class="item-bg11" 
+                                    dndAreaType='ass' [dndDropzone]="['ass', 'ava']" [dndDropGroup]="group2"
+                                    (dndDrop)="dropToSchedule($event)"
+                                >
+                                    <div class="rotate-text key-content">
+                                        <p class="goto-href">{{group2.key}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div fxFlex="80" fxLayout="column" class="group-content">
+                                <div *ngFor="let group3 of group2.jobs; let kk = index;"
+                                    class="jobitem-group-item border-bottom-2" fxLayout="column" 
+                                    dndEffectAllowed='move' [dndDraggable]="group3" [dndType]="'ass'"
+                                    (dndMoved)="dragOnScheduleJobs($event, index, [group3])"
+                                    (dblclick)="onDbClickScheduled([group3])"
+                                >
+                                    <div class="item-bg22" fxLayout="column" 
+                                        [dndDropzone]="['ass', 'ava']" dndAreaType='ass' [dndDropGroup]="group3"
+                                        (dndDrop)="dropToSchedule($event)"
+                                    >
+                                        <div fxLayout="row" class="job-id" fxFlex="25">
+                                            <div>
+                                                <p class="goto-href">{{group3.orderCode}}</p>
+                                            </div>
+                                        </div>
+
+                                        <div fxLayout="row" class="job-sys" >{{group3.customerName}}</div>
+                                        <div fxLayout="row" class="job-state" fxFlex="40">
+
+                                            <div fxFlex="40">
+                                                <p class="job-item-title">Complete:</p>
+                                                
+                                                <p class="job-item-content">{{group3.completePct | unitsFormat :"%":0}}</p>
+                                            </div>
+                                            <div fxFlex="60">
+                                                <p class="job-item-title">Remaining:</p>
+                                                <p class="job-item-content">{{group3.remainingFt | taskLenghFilter}} ft <span style="font-style: italic"> {{group3.remainingRuntime | timeSpan}}</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                        
+                    
+                </div>
+                </div>
+                
+            </div>
+        </perfect-scrollbar>
+    </div>
+
+
+
+    <div fxFlex="60" class="available-jobs">
+        <div fxLayout="row" class="margin-top-13">
+            <div fxFlex="33">
+                <h3 class="title-avail-jobs">AVAILABLE JOBS ({{(availableJobsGridData$ | async).count}})</h3>
+            </div>
+            <!-- <div class="col-md-8 col-lg-68 search-container">
+            <div fxLayout="row wrap" class="search-div">
+                <md-input-container md-no-float class="search-input" flex>
+                    <md-icon md-font-icon="icon-filter-outline" class="icon filter-icon"></md-icon>
+                    <input ng-model="filterText" class="filter-text" aria-label="Search Text" ng-keyup="filterText$.onNext(filterText)">
+
+                </md-input-container>
+                <md-menu md-position-mode="target-right target" class="jobs-menu">
+                    <div class="helpIconDiv" ng-click="$mdOpenMenu($event)">
+                    <md-icon md-svg-src="assets/images/settings.svg" class="icon gear-icon"></md-icon>
+                    </div>
+                    <md-menu-content width="2" class="availJobsFilterDiv">
+                    <div fxLayout="row" class="addColumn" fxLayoutAlign="center center">Add/Remove Column</div>
+                    <div class="vertical-scroll">
+                        <md-menu-item ng-repeat="item in availableJobColumns" class="filter-items height-26">
+                            <div fxLayout="row" class="filter-items-div">
+                                <md-checkbox name="{{item.name}}" aria-label="{{item.name}}" ng-checked="item.ischecked" class="filter-check" ng-click="onAvailableJobColumnToggle(item)">{{item.name}}</md-checkbox>
+                            </div>
+                        </md-menu-item>
+                    </div>
+                    <md-menu-divider></md-menu-divider>
+                    <md-menu-item class="filter-items">
+                        <div fxLayout="row" class="filter-items-div">
+                            <md-button class="md-raised md-primary" ng-click="resetDefaultColumns()">Reset Defaults</md-button>
+                        </div>
+                    </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+            </div>
+        </div> -->
+        </div>
+
+
+        <div fxLayout="row" class="ava-menu" *ngIf="(availableJobsGridData$ | async).count > 0">
+            <div class="ava-menu-content" fxLayout="row">
+                <div *ngFor="let item of availableJobColumns"
+                    class="menu-item" fxFlex="1 1 auto" [hidden]="!item.ischecked"
+                    [dndDraggable]="item" [dndType]="'item'" 
+                    (dndMoved)="onAvailableJobColumnReorder(item)"
+                    (dblclick)="onDbClickAvailableJobsHeader(item)"
+                >
+                        <div class="item-bg" 
+                            [dndHorizontal]="true"
+                            [dndDropzone]="['item']"
+                            dndAreaType='header'
+                            (dndDrop)="dropOnAvailableHeader(index)"
+                        >                      
+                        </div>
+                    
+                    {{item.name}}
+                </div>
+            </div>
+        </div>
+
+
+
+        <perfect-scrollbar class="dropzone" *ngIf="(availableJobsGridData$ | async).count>0"
+            [dndDropzone]="['ass']" dndAreaType='ava' (dndDrop)="dropToAvailableJobs($event)"
+        >
+            <div class="group-content" fxLayout="column" fxFlex='grow'>
+                <div *ngFor="let node of (availableJobsGridData$ | async).jobs;">
+                    <ng-container *ngTemplateOutlet="assGrTemplate; context: {node: node}"></ng-container>
+                </div >
+            </div>
+        </perfect-scrollbar>
+
+    </div>        
+</div>

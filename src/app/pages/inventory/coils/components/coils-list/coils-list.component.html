@@ -1,0 +1,80 @@
+<div class="inventory-coils main-table" fxLayout="column">
+  <div class="inventory-coils-header" fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="inventory-coils-title">
+      Coils
+    </div>
+    <input class="inventory-coils-filter" matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </div>
+  <mat-table #table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="coilId">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Coil ID</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <div class="table-click-cell" (click)="gotoCoilDetail(row)">
+          {{ row['coilId'] }}
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="materialCode">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Material</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <div class="table-click-cell" (click)="gotoMaterialDetail(row)">
+          {{ row['materialCode'] }}
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row['description'] }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="lengthRemainingFt">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Remaining (Ft)</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row['lengthRemainingFt'] | number : '1.0-1' }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="lengthUsedFt">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Used (Ft)</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row['lengthUsedFt'] | number : '1.0-1' }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="lengthNonExemptScrapFt">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Scrap (Ft)</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row['lengthNonExemptScrapFt'] | number : '1.0-1' }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="dateIn">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Age</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row['dateIn'] }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="locationId">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Location</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row['locationId'] }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="vendorName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Vendor</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row['vendorName'] }}
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="visibleColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: visibleColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[10, 15, 20, 25]" showFirstLastButtons></mat-paginator>
+</div>

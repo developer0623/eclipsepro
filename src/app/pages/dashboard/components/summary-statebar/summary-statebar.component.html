@@ -1,0 +1,7 @@
+<div class="chart-content">
+    <div class="main-area" [ngStyle]="getMainArea(order)" *ngFor="let order of [0, 1, 2]"></div>
+
+    <div class="target-pos" [ngStyle]="getTargetPos()"></div>
+    <div class="value-area" [ngStyle]="getValueArea()"></div>
+</div>
+    

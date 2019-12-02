@@ -1,0 +1,100 @@
+.warehouse-tasks {
+  .task-content {
+		width: 100%;
+		display: inline-table;
+  }
+  .task-list {
+  	margin: 0 2%;
+  	width: 46%;
+  	display: block;
+  	float: left;
+  	@media screen and (min-width: 1280px) {
+    	width: 29%;
+	  }
+
+  	.task-list-header {
+  		font-size: 20px;
+  		font-weight: bold;
+  	}
+  }
+
+  .current-task-list, .active-task-list {
+  	.task-list-header {
+  		margin-bottom: 28px;
+  	}
+  }
+
+  .not-showed-title {
+		text-align: center;
+		font-weight: bold;
+    margin: 20px 0;
+    padding : 5px !important;
+    font-size: 13px;
+  }
+
+  .mat-form-field-flex {
+    background-color: transparent !important;
+    padding: 0;
+  }
+  .mat-select-arrow-wrapper {
+    transform: translateY(0) !important;
+  }
+  .mat-form-field-infix {
+    padding: 0.3em 0;
+  }
+  mat-form-field {
+    padding: 2px;
+  }
+
+  .task-complete-calendar {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 15px;
+
+    .real-calendar {
+      position: absolute;
+      z-index: 1;
+      font-size: 16px;
+      right: 0;
+      .mat-form-field-wrapper {
+        padding-bottom: 0;
+      }
+      .mat-input-element {
+        display: none;
+      }
+    }
+
+    .showed-calendar {
+      position: absolute;
+      display: flex;
+      z-index: 10;
+      mat-icon {
+        font-size: 30px;
+        line-height: 30px;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+      }
+      p {
+        margin: 0;
+        font-size: 20px;
+        color: rgba(0, 0, 0, 0.7);
+        line-height: 30px;
+        span {
+          margin-left: 10px;
+          font-size: 15px;
+          color: rgba(0, 0, 0, 0.5);
+        }
+        padding: 0px 5px 0 10px;
+      }
+    }
+
+    // .open-icon {
+    //   position: absolute;
+    //   right: 20px;
+    // }
+  }
+}

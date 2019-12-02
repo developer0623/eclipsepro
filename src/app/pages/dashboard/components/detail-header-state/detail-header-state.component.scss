@@ -1,0 +1,23 @@
+$running: #4caf50;
+$halted: #f44336;
+
+.detail-header-state {
+  padding: 0 17px 0 10px;
+  height: 34px;
+  .back-play {
+    background-color: $running !important;
+  }
+  .back-stop {
+    background-color: $halted !important;
+  }
+  i {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+  }
+  .working-time {
+    margin-left: 12px;
+    font-size: 18px;
+  }
+
+}

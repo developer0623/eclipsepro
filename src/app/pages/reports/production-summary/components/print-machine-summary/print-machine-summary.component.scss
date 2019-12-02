@@ -1,0 +1,65 @@
+$main-font: 9px;
+$span-font: 8px;
+:host {
+  display: block;
+}
+.print-summary-content {
+    display: flex;
+    font-size: 9px;
+    .ms-column {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        p {
+            margin: 0;
+        }
+        .bullet-content {
+            width: 100%;
+            height: 25px !important;
+        }
+        .main-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: $main-font;
+            font-weight: bold;
+            width: 100%;
+            height: 25px;
+            flex-wrap: wrap;
+            text-align: center;
+            background-color: #dddddd !important;
+            padding: 2px 0;
+            & > div {
+                width: 100%;
+                line-height: 9px;
+            }
+            span {
+                margin-left: 2px;
+                font-size: $span-font;
+            }
+        }
+
+        &.column-title {
+            width: 13%;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+        &.column-good-scrap {
+            width: 14%;
+        }
+
+        &.column-running {
+            flex: 1;
+        }
+
+        &.column-oee-target {
+            width: 11%;
+        }
+        &.column-asy {
+            flex: 1;
+        }
+    }
+
+
+}

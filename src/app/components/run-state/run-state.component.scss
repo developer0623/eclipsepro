@@ -1,0 +1,50 @@
+$running: #4caf50;
+$halted: #f44336;
+$gray-color: #999;
+.machine-status-tag {
+
+  .icon-play {
+      color: $running !important;
+  }
+  .icon-stop {
+      color: $halted !important;
+  }
+  .icon-close-circle-outline {
+    margin-left: 3px;
+  }
+
+  .tag-label {
+    color: rgba(0,0,0,.54);
+    font-weight: 500;
+    -webkit-font-smoothing: subpixel-antialiased;
+    font-smoothing: subpixel-antialiased;
+    font-size: 14px;
+    // height: 15px;
+    line-height: 24px;
+  }
+
+  .red-color {
+		color: #d8475a;
+	}
+
+	.late-sign {
+		font-size: 13px;
+		margin-right: 2px;
+		font-weight: 300;
+		font-style: italic;
+	}
+
+	.time-sign {
+		opacity: 0.8;
+		margin-left: 2px;
+		font-weight: 300;
+	}
+
+	.gray-color {
+		color: $gray-color;
+	}
+
+	.letter-bold {
+		font-weight: bold;
+	}
+}
