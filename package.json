@@ -41,7 +41,7 @@
     "d3": "^5.7.0",
     "dc": "^3.1.3",
     "hammerjs": "~2.0.8",
-    "highlight.js": "~9.12.0",
+    "highlight.js": "~10.4.1",
     "lodash-es": "~4.17.5",
     "moment": "~2.24.0",
     "ngrx-store-freeze": "^0.2.4",
